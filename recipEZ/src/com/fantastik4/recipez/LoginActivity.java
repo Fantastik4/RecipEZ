@@ -2,6 +2,7 @@ package com.fantastik4.recipez;
 
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,16 +12,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-public class MainActivity extends ActionBarActivity {
+public class LoginActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		Button button = (Button) findViewById(R.id.signIn);
+		Button login = (Button) findViewById(R.id.signIn);
 
-		button.setOnClickListener(new OnClickListener()
+		login.setOnClickListener(new OnClickListener()
 		{
 
 			@Override
@@ -43,6 +44,9 @@ public class MainActivity extends ActionBarActivity {
 					if(usernameCheck.getText().toString().trim().equals(testUser)
 							&& passwordCheck.getText().toString().trim().equals(testPass)) {
 						displayErrorMessage.setVisibility(View.INVISIBLE);
+						Intent i = new Intent(LoginActivity.this, SearchActivity.class);
+						startActivity(i);
+						overridePendingTransition(R.animator.animation1, R.animator.animation2);
 					} else {
 						displayErrorMessage.setVisibility(View.VISIBLE);
 						displayErrorMessage.setText(getResources().getString(R.string.invalidCredentials));

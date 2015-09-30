@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.fantastik4.recipez.MainActivity" >
+    tools:context="com.fantastik4.recipez.LoginActivity" >
 
     <ImageView
         android:id="@+id/recipezLogo"
