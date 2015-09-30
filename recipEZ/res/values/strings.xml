@@ -10,5 +10,6 @@
     <string name="logo">logoForSignupPage</string>
     <string name="emptyFields">All fields are required!</string>
     <string name="invalidCredentials">Username and Password are invalid!</string>
+    <string name="searchRefrigerator">FIND FOOD</string>
 
 </resources>

@@ -1,26 +1,41 @@
 package com.fantastik4.recipez;
 
-import android.support.v7.app.ActionBarActivity;
-import android.text.TextUtils;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.text.TextUtils;
+
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
+
+import android.content.Intent;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.view.View.OnClickListener;
+import android.support.v7.app.ActionBarActivity;
 
 public class LoginActivity extends ActionBarActivity {
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		Button login = (Button) findViewById(R.id.signIn);
-
+		
+		try {
+			RestClient newClient = new RestClient();
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		login.setOnClickListener(new OnClickListener()
 		{
 
@@ -29,7 +44,7 @@ public class LoginActivity extends ActionBarActivity {
 				// TODO Auto-generated method stub
 
 				//Test validation
-				String testUser = "nfulinarjr";
+				String testUser = "nfulinarajr";
 				String testPass = "testPass";
 				EditText usernameCheck = (EditText) findViewById(R.id.username);
 				EditText passwordCheck = (EditText) findViewById(R.id.password);
