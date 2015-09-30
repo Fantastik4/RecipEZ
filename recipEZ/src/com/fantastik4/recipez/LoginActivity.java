@@ -3,15 +3,10 @@ package com.fantastik4.recipez;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.text.TextUtils;
-
-import java.io.IOException;
-
-import org.apache.http.client.ClientProtocolException;
-
-import android.content.Intent;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.text.TextUtils;
+import android.content.Intent;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.view.View.OnClickListener;
@@ -25,16 +20,6 @@ public class LoginActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 
 		Button login = (Button) findViewById(R.id.signIn);
-		
-		try {
-			RestClient newClient = new RestClient();
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		login.setOnClickListener(new OnClickListener()
 		{
