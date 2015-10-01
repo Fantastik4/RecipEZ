@@ -5,18 +5,18 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/commons-cli-1.2.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/fluent-hc-4.5.1.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/httpclient-4.5.1.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/httpclient-cache-4.5.1.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/httpclient-win-4.5.1.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/httpcore-4.4.3.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/httpcore-ab-4.4.3.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/httpcore-nio-4.4.3.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/httpmime-4.5.1.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/jna-4.1.0.jar"/>
-	<classpathentry kind="lib" path="/Users/napoleonfulinarajr/Documents/workspace/git/RecipEZ/jars/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/fluent-hc-4.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/httpclient-4.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/httpclient-cache-4.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/httpclient-win-4.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/httpcore-4.4.3.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/httpcore-ab-4.4.3.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/httpcore-nio-4.4.3.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/httpmime-4.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/crepanich23/Desktop/Fall2015/CECS491/Clone/RecipEZ/jars/jna-platform-4.1.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
