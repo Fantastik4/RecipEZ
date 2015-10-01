@@ -1,16 +1,23 @@
 package com.fantastik4.recipez;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 public class SearchActivity extends Activity {
-
+	RecipeProvider recipeProvider;
+	ArrayList<Recipe> recipes;
+	Button search;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
+		recipeProvider = new RecipeProvider();
+
 	}
 
 	@Override
@@ -31,8 +38,11 @@ public class SearchActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+		
+	
 	
 	public void onBackPressed() {
+		recipes = recipeProvider.FetchAllRecipes();
 		//Do nothing
 	}
 }

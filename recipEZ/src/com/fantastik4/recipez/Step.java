@@ -19,6 +19,11 @@ public class Step {
 		this.stepID = id;
 		this.description = desc;
 	}
+	
+	public Step(String desc)
+	{
+		this.description = desc;
+	}
 	//getters and setters
 	/**
 	 * Setter method for Step ID
