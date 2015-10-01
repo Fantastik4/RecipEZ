@@ -1,53 +1,79 @@
 package com.fantastik4.recipez;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.text.TextUtils;
+import android.util.Log;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
+
 import android.content.Intent;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.view.View.OnClickListener;
 import android.support.v7.app.ActionBarActivity;
 
 public class LoginActivity extends ActionBarActivity {
-	
+	Button login;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
-		Button login = (Button) findViewById(R.id.signIn);
 		
-		login.setOnClickListener(new OnClickListener()
-		{
+		login = (Button) findViewById(R.id.signIn);
+		login.setClickable(false);
+		new LongRunningGetIO().execute();
+		
+		//****PARSE XML AND RETRIEVE USERNAME AND PASSWORD****
+		
+		login.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
-				//Test validation
-				String testUser = "nfulinarajr";
-				String testPass = "testPass";
+				
+				//****TESTING VALIDATION ONLY****
+				//****REPLACE TEST DATA WITH PARSED DATA
+				String testUser = "q";
+				String testPass = "q";
 				EditText usernameCheck = (EditText) findViewById(R.id.username);
 				EditText passwordCheck = (EditText) findViewById(R.id.password);
-				
+
 				EditText displayErrorMessage = (EditText) findViewById(R.id.error_message);
 
-				if(TextUtils.isEmpty(usernameCheck.getText().toString().trim()) || 
-						TextUtils.isEmpty(passwordCheck.getText().toString().trim())) {
+				if(TextUtils.isEmpty(usernameCheck.getText().toString().trim()) || TextUtils.isEmpty(passwordCheck.getText().toString().trim())) {
+					
+					//Empty fields
 					displayErrorMessage.setVisibility(View.VISIBLE);
 					displayErrorMessage.setText(getResources().getString(R.string.emptyFields));
+					
 				} else {
-					if(usernameCheck.getText().toString().trim().equals(testUser)
-							&& passwordCheck.getText().toString().trim().equals(testPass)) {
+					
+					if(usernameCheck.getText().toString().trim().equals(testUser) && passwordCheck.getText().toString().trim().equals(testPass)) {
+						
+						//Valid credentials
 						displayErrorMessage.setVisibility(View.INVISIBLE);
 						Intent i = new Intent(LoginActivity.this, SearchActivity.class);
+						
+						//****GO TO PAGE TWO UPON SUCCESS USERNAME AND PASSWORD MATCH****
+						
 						startActivity(i);
 						overridePendingTransition(R.animator.animation1, R.animator.animation2);
 					} else {
+						//Invalid credentials
 						displayErrorMessage.setVisibility(View.VISIBLE);
 						displayErrorMessage.setText(getResources().getString(R.string.invalidCredentials));
 					}
@@ -74,5 +100,40 @@ public class LoginActivity extends ActionBarActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+	
+	private class LongRunningGetIO extends AsyncTask <Void, Void, String> {
+
+		protected String getASCIIContentFromEntity(HttpEntity entity) throws IllegalStateException, IOException {
+			InputStream in = entity.getContent();
+			StringBuffer out = new StringBuffer();
+			int n = 1;
+			while (n>0) {
+				byte[] b = new byte[4096];
+				n =  in.read(b);
+				if (n>0) out.append(new String(b, 0, n));
+			}
+			
+			// ****XML STRING****
+			// ****PRINTING OUT FOR TESTING PURPOSES ONLY****
+			System.out.println("OUT TO STRING: " + out.toString());
+			return out.toString();
+		}
+
+		@Override
+		protected String doInBackground(Void... params) {
+			HttpClient httpClient = new DefaultHttpClient();
+			HttpContext localContext = new BasicHttpContext();
+			HttpGet httpGet = new HttpGet("http://recipezservice-recipez.rhcloud.com/rest/users");
+			String text = null;
+			try {
+				HttpResponse response = httpClient.execute(httpGet, localContext);
+				HttpEntity entity = response.getEntity();
+				text = getASCIIContentFromEntity(entity);
+			} catch (Exception e) {
+				return e.getLocalizedMessage();
+			}
+			return text;
+		}
 	}
 }
