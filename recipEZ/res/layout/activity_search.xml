@@ -21,7 +21,7 @@
     </SearchView>
 
     <Button
-        android:id="@+id/signIn"
+        android:id="@+id/findFood"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
