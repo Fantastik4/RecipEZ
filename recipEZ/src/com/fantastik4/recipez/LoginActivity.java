@@ -33,7 +33,7 @@ public class LoginActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInsanceState) {
 		super.onCreate(savedInsanceState);
 		setContentView(R.layout.activity_main);
-		login = (Button) findViewById(R.id.signIn);
+		login = (Button) findViewById(R.id.signin);
 		login.setClickable(false);
 		new LongRunningGetIO().execute();
 		

@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 
 public class SearchActivity extends Activity {
-	RecipeProvider recipeProvider;
+	RecipeProvider recipeProvider = new RecipeProvider();
 	ArrayList<Recipe> recipes;
 	Button search;
 	@Override
@@ -18,6 +18,7 @@ public class SearchActivity extends Activity {
 		setContentView(R.layout.activity_search);
 		recipeProvider = new RecipeProvider();
 
+		search = (Button)findViewById(R.id.findFood);
 	}
 
 	@Override

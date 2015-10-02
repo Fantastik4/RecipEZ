@@ -58,7 +58,7 @@
         android:paddingStart="10dp"/>
 
     <Button
-        android:id="@+id/signIn"
+        android:id="@+id/signin"
         android:fontFamily="sans-serif"
         android:layout_gravity="center_horizontal"
         android:layout_height="50dp"

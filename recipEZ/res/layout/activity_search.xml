@@ -12,16 +12,15 @@
 
     <SearchView
         android:id="@+id/searchView1"
-        android:gravity="center"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:layout_width="250dp">
-
+        android:gravity="center" >
     </SearchView>
 
     <Button
-        android:id="@+id/signIn"
+        android:id="@+id/findFood"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
@@ -29,5 +28,12 @@
         android:fontFamily="sans-serif"
         android:onClick="validate"
         android:text="@string/searchRefrigerator" />
+
+    <LinearLayout
+        android:id="@+id/LinearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+    </LinearLayout>
 
 </LinearLayout>
