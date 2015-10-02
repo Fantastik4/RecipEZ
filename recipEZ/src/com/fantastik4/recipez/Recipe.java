@@ -26,6 +26,9 @@ public class Recipe {
 		this.setRecipeSteps(steps);
 		this.setIngredients(ingr);
 	}
+	public Recipe() {
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * Getter method for name
 	 * @return String value of Recipe name

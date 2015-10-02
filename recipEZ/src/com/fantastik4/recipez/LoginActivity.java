@@ -11,6 +11,7 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,12 +28,11 @@ import android.support.v7.app.ActionBarActivity;
 
 public class LoginActivity extends ActionBarActivity {
 	Button login;
-
+	UserProvider userProvider = new UserProvider();
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+	protected void onCreate(Bundle savedInsanceState) {
+		super.onCreate(savedInsanceState);
 		setContentView(R.layout.activity_main);
-		
 		login = (Button) findViewById(R.id.signIn);
 		login.setClickable(false);
 		new LongRunningGetIO().execute();
@@ -44,11 +44,9 @@ public class LoginActivity extends ActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
 				//****TESTING VALIDATION ONLY****
 				//****REPLACE TEST DATA WITH PARSED DATA
-				String testUser = "q";
-				String testPass = "q";
+
 				EditText usernameCheck = (EditText) findViewById(R.id.username);
 				EditText passwordCheck = (EditText) findViewById(R.id.password);
 
@@ -62,7 +60,7 @@ public class LoginActivity extends ActionBarActivity {
 					
 				} else {
 					
-					if(usernameCheck.getText().toString().trim().equals(testUser) && passwordCheck.getText().toString().trim().equals(testPass)) {
+					if(ValidateUserCredentials(usernameCheck.getText().toString().trim(), passwordCheck.getText().toString().trim())) {
 						
 						//Valid credentials
 						displayErrorMessage.setVisibility(View.INVISIBLE);
@@ -80,6 +78,16 @@ public class LoginActivity extends ActionBarActivity {
 				}
 			}
 		});
+	}
+	
+	private boolean ValidateUserCredentials(String username, String password)
+	{
+		ArrayList<User> users = userProvider.FetchAllUsers();
+		for(User u: users)
+		{
+			if(u.getName().equals(username) && password.equals("password")) return true;
+		}
+		return false;
 	}
 
 	@Override
