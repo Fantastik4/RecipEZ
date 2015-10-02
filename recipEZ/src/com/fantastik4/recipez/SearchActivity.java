@@ -6,10 +6,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 
 public class SearchActivity extends Activity {
-	RecipeProvider recipeProvider;
+	RecipeProvider recipeProvider = new RecipeProvider();
 	ArrayList<Recipe> recipes;
 	Button search;
 	@Override
@@ -18,6 +20,16 @@ public class SearchActivity extends Activity {
 		setContentView(R.layout.activity_search);
 		recipeProvider = new RecipeProvider();
 
+		search = (Button)findViewById(R.id.findFood);
+		search.setClickable(false);
+		
+		search.setOnClickListener(new OnClickListener(){
+			public void onClick(View v) 
+			{
+				recipes = recipeProvider.FetchAllRecipes();
+				
+			}
+		});
 	}
 
 	@Override
@@ -42,7 +54,6 @@ public class SearchActivity extends Activity {
 	
 	
 	public void onBackPressed() {
-		recipes = recipeProvider.FetchAllRecipes();
 		//Do nothing
 	}
 }
