@@ -17,6 +17,9 @@ public class User {
 		this.setUserID(id);
 		this.setName(name);
 	}
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * Getter method for user ID
 	 * @return String value of the user id
