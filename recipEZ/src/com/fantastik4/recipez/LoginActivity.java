@@ -28,7 +28,7 @@ import android.support.v7.app.ActionBarActivity;
 
 public class LoginActivity extends ActionBarActivity {
 	Button login;
-	UserProvider userProvider = new UserProvider();
+	UserVerification userVerify = new UserVerification();
 	@Override
 	protected void onCreate(Bundle savedInsanceState) {
 		super.onCreate(savedInsanceState);
@@ -82,12 +82,7 @@ public class LoginActivity extends ActionBarActivity {
 	
 	private boolean ValidateUserCredentials(String username, String password)
 	{
-		ArrayList<User> users = userProvider.FetchAllUsers();
-		for(User u: users)
-		{
-			if(u.getName().equals(username) && password.equals("password")) return true;
-		}
-		return false;
+		return userVerify.validate(username, password);
 	}
 
 	@Override
