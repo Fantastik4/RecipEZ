@@ -82,7 +82,8 @@ public class LoginActivity extends ActionBarActivity {
 	
 	private boolean ValidateUserCredentials(String username, String password)
 	{
-		return userVerify.validate(username, password);
+		boolean valid = userVerify.validate(username, password);
+		return valid;
 	}
 
 	@Override

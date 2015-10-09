@@ -39,7 +39,7 @@ public class UserVerification {
 
                     myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
                     myParser.setInput(stream, null);
-                    ParseUsersFromXML(myParser);
+                    ParseVerification(myParser);
                     stream.close();
                 }
                 catch (Exception e) {
@@ -50,7 +50,7 @@ public class UserVerification {
         thread.start();
     }
 	
-	public void ParseUsersFromXML(XmlPullParser myParser) 
+	public void ParseVerification(XmlPullParser myParser) 
 	{
 		int event;
 		String value = "", text = "";
