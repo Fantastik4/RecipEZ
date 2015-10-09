@@ -16,10 +16,8 @@ public class UserVerification {
 			ValidateUser(u, p);
 			Thread.sleep(300);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("FIRST: " + isValid);
 		return isValid;
 	}
 
@@ -46,7 +44,6 @@ public class UserVerification {
 					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 					myParser.setInput(stream, null);
 					ParseVerification(myParser);
-					System.out.println("PARSEVARIFY: " + isValid);
 					stream.close();
 				}
 				catch (Exception e) {

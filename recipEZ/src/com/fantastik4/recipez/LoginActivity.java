@@ -37,10 +37,9 @@ public class LoginActivity extends ActionBarActivity {
 					displayErrorMessage.setText(getResources().getString(R.string.emptyFields));
 
 				} else {
-					boolean check = ValidateUserCredentials(usernameCheck.getText().toString().trim(), passwordCheck.getText().toString().trim());
-					if(check == true) {
+					if(ValidateUserCredentials(usernameCheck.getText().toString().trim(), passwordCheck.getText().toString().trim())) {
 						//Valid credentials
-						
+
 						displayErrorMessage.setVisibility(View.INVISIBLE);
 						Intent i = new Intent(LoginActivity.this, SearchActivity.class);
 
