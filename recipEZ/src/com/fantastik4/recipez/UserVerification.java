@@ -3,20 +3,23 @@ package com.fantastik4.recipez;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Timer;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 public class UserVerification {
 	private boolean isValid = false;
+	private boolean validationReady = true;
 	public UserVerification(){}
 	
 	public synchronized boolean validate(String u, String p){
-		try {
-			ValidateUser(u, p);
-			Thread.sleep(300);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		validationReady = false;
+		ValidateUser(u, p);
+		long startTime = System.currentTimeMillis();
+		while(!validationReady)
+		{
+			if(System.currentTimeMillis() - startTime > 10000) return false; // timeout
 		}
 		return isValid;
 	}
@@ -76,6 +79,7 @@ public class UserVerification {
 					if(value.equals("true")){
 						isValid = true;
 					}
+					validationReady = true;
 				}
 				event = myParser.next();
 			}
