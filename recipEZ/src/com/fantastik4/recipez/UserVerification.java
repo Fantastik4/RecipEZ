@@ -30,7 +30,7 @@ public class UserVerification {
 			public void run() {
 				try {
 					XmlPullParserFactory xmlFactoryObject;
-					URL url = new URL("http://recipezservice-recipez.rhcloud.com/rest/VerificationServices/VerifyUser/"+name+"/"+pass);
+					URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/VerificationServices/VerifyUser/"+name+"/"+pass);
 					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
 					conn.setReadTimeout(10000 /* milliseconds */);

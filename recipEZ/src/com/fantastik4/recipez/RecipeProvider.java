@@ -74,7 +74,7 @@ public class RecipeProvider {
             public void run() {
                 try {
             		XmlPullParserFactory xmlFactoryObject;
-                    URL url = new URL("http://recipezservice-recipez.rhcloud.com/rest/recipes");
+                    URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/recipes");
                     HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
                     conn.setReadTimeout(10000 /* milliseconds */);
