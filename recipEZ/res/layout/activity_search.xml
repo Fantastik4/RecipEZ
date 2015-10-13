@@ -29,10 +29,13 @@
         android:fontFamily="sans-serif"
         android:onClick="validate"
         android:text="@string/searchRefrigerator" />
-    
+
     <ListView
         android:id="@+id/recipeList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:choiceMode="multipleChoice"
+        tools:listitem="@android:layout/simple_list_item_checked" >
+    </ListView>
 
 </LinearLayout>
