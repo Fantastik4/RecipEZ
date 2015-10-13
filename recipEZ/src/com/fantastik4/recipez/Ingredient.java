@@ -23,6 +23,9 @@ public class Ingredient {
 		this.setName(n);
 		this.setAmount(a);
 	}
+	public Ingredient() {
+		// TODO Auto-generated constructor stub
+	}
 	/**
 	 * Getter method for Ingredient ID
 	 * @return String value of the ingredient ID
