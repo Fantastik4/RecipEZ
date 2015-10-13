@@ -2155,18 +2155,19 @@ containing a value of this type.
         public static final int abc_select_dialog_material=0x7f030017;
         public static final int activity_main=0x7f030018;
         public static final int activity_search=0x7f030019;
-        public static final int notification_media_action=0x7f03001a;
-        public static final int notification_media_cancel_action=0x7f03001b;
-        public static final int notification_template_big_media=0x7f03001c;
-        public static final int notification_template_big_media_narrow=0x7f03001d;
-        public static final int notification_template_lines=0x7f03001e;
-        public static final int notification_template_media=0x7f03001f;
-        public static final int notification_template_part_chronometer=0x7f030020;
-        public static final int notification_template_part_time=0x7f030021;
-        public static final int select_dialog_item_material=0x7f030022;
-        public static final int select_dialog_multichoice_material=0x7f030023;
-        public static final int select_dialog_singlechoice_material=0x7f030024;
-        public static final int support_simple_spinner_dropdown_item=0x7f030025;
+        public static final int activity_select_ingredients=0x7f03001a;
+        public static final int notification_media_action=0x7f03001b;
+        public static final int notification_media_cancel_action=0x7f03001c;
+        public static final int notification_template_big_media=0x7f03001d;
+        public static final int notification_template_big_media_narrow=0x7f03001e;
+        public static final int notification_template_lines=0x7f03001f;
+        public static final int notification_template_media=0x7f030020;
+        public static final int notification_template_part_chronometer=0x7f030021;
+        public static final int notification_template_part_time=0x7f030022;
+        public static final int select_dialog_item_material=0x7f030023;
+        public static final int select_dialog_multichoice_material=0x7f030024;
+        public static final int select_dialog_singlechoice_material=0x7f030025;
+        public static final int support_simple_spinner_dropdown_item=0x7f030026;
     }
     public static final class menu {
         public static final int main=0x7f0d0000;
@@ -2235,6 +2236,7 @@ containing a value of this type.
         public static final int action_settings=0x7f0a0013;
         public static final int app_name=0x7f0a0012;
         public static final int emptyFields=0x7f0a0019;
+        public static final int hello_world=0x7f0a001d;
         public static final int invalidCredentials=0x7f0a001a;
         public static final int login=0x7f0a0016;
         public static final int logo=0x7f0a0018;
@@ -2248,6 +2250,7 @@ containing a value of this type.
          [CHAR LIMIT=4] 
          */
         public static final int status_bar_notification_info_overflow=0x7f0a0011;
+        public static final int title_activity_select_ingredients=0x7f0a001c;
         public static final int username=0x7f0a0014;
     }
     public static final class style {

@@ -10,13 +10,21 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class IngredientProvider {
 	private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
-
+	private boolean ingredientsReady = true;
+	
 	public IngredientProvider()
 	{
-		GetIngredientsFromService();
+		
 	}
 	public ArrayList<Ingredient> FetchAllIngredients()
 	{
+		ingredientsReady = false;
+		GetIngredientsFromService();
+		long startTime = System.currentTimeMillis();
+		while(!ingredientsReady)
+		{
+			if(System.currentTimeMillis() - startTime > 10000) return null; // timeout
+		}
 		return ingredients;
 	}
 	
@@ -56,6 +64,7 @@ public class IngredientProvider {
 				}
 				event = myParser.next();
 			}
+			ingredientsReady = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,7 +76,7 @@ public class IngredientProvider {
             public void run() {
                 try {
             		XmlPullParserFactory xmlFactoryObject;
-                    URL url = new URL("http://recipezservice-recipez.rhcloud.com/rest/ingredients");
+                    URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/FetchAllIngredients/");
                     HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
                     conn.setReadTimeout(10000 /* milliseconds */);

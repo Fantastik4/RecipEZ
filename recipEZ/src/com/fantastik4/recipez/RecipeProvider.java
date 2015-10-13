@@ -10,15 +10,23 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class RecipeProvider {
 	private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-
+	private boolean recipesReady = true;
+	
 	public RecipeProvider()
 	{
-		GetRecipesFromService();
 	}
 	public ArrayList<Recipe> FetchAllRecipes()
 	{
+		recipesReady = false;
+		GetRecipesFromService();
+		long startTime = System.currentTimeMillis();
+		while(!recipesReady)
+		{
+			if(System.currentTimeMillis() - startTime > 10000) return null; // timeout
+		}
 		return recipes;
 	}
+	
 	
 	public void ParseRecipesFromXML(XmlPullParser myParser) 
 	{
@@ -63,6 +71,7 @@ public class RecipeProvider {
 				}
 				event = myParser.next();
 			}
+			recipesReady = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -74,7 +83,7 @@ public class RecipeProvider {
             public void run() {
                 try {
             		XmlPullParserFactory xmlFactoryObject;
-                    URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/recipes");
+                    URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/FetchAllRecipes/");
                     HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
                     conn.setReadTimeout(10000 /* milliseconds */);
