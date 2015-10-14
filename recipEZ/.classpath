@@ -5,18 +5,18 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="dependencies/commons-cli-1.2.jar"/>
-	<classpathentry kind="lib" path="dependencies/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="dependencies/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="dependencies/fluent-hc-4.5.1.jar"/>
-	<classpathentry kind="lib" path="dependencies/httpclient-4.5.1.jar"/>
-	<classpathentry kind="lib" path="dependencies/httpclient-cache-4.5.1.jar"/>
-	<classpathentry kind="lib" path="dependencies/httpclient-win-4.5.1.jar"/>
-	<classpathentry kind="lib" path="dependencies/httpcore-4.4.3.jar"/>
-	<classpathentry kind="lib" path="dependencies/httpcore-ab-4.4.3.jar"/>
-	<classpathentry kind="lib" path="dependencies/httpcore-nio-4.4.3.jar"/>
-	<classpathentry kind="lib" path="dependencies/httpmime-4.5.1.jar"/>
-	<classpathentry kind="lib" path="dependencies/jna-4.1.0.jar"/>
-	<classpathentry kind="lib" path="dependencies/jna-platform-4.1.0.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/fluent-hc-4.5.1.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/httpclient-4.5.1.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/httpclient-cache-4.5.1.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/httpclient-win-4.5.1.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/httpcore-4.4.3.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/httpcore-ab-4.4.3.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/httpcore-nio-4.4.3.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/httpmime-4.5.1.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="bin/dependencies/jna-platform-4.1.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

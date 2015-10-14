@@ -14,15 +14,17 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckedTextView;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 
 public class SearchActivity extends Activity {
 	IngredientProvider ingredientProvider;
 	ArrayList<Ingredient> ingredients;
 	ArrayList<Boolean> checkedStates;
 	Button search;
-	ListView displayRecipes;
-	ArrayList<String> ingredientNames;
-	SearchActivity sa = this;
+	SearchView searchField;
+	ArrayList<String> ingredientNames, displayedIngredients;
+	IngredientListAdapter ingredientListAdapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,51 +35,81 @@ public class SearchActivity extends Activity {
 		
 		search = (Button)findViewById(R.id.findFood);
 		search.setClickable(false);
-		
-		PopulateIngredientList();
-		
 		search.setOnClickListener(new OnClickListener(){
 			public void onClick(View v) 
 			{
 				
 			}
+		});		
+		
+		searchField = (SearchView) findViewById(R.id.searchView1);
+		searchField.setOnQueryTextListener(new OnQueryTextListener(){
+			
+			@Override
+			public boolean onQueryTextChange(String searchArg) {
+				// TODO Auto-generated method stub
+				UpdateDisplayedIngredients(searchArg);
+				ingredientListAdapter.notifyDataSetChanged();
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
 		});
 		
 		
+		PopulateIngredientList();
+		
+		
+	}
+
+	private void UpdateDisplayedIngredients(String searchArg) 
+	{
+		displayedIngredients.clear();
+		for(String name: ingredientNames)
+		{
+			if(name.toLowerCase().contains(searchArg.toLowerCase())) displayedIngredients.add(name);
+		}
 	}
 
 	private void PopulateIngredientList()
 	{
-		ingredients = ingredientProvider.FetchAllIngredients();
-		ListView lv = (ListView)findViewById(R.id.recipeList);
+		ListView listView = (ListView)findViewById(R.id.recipeList);		
 		
-        ArrayList<String> ingredientNames = new ArrayList<String>();
-        for(Ingredient i: ingredients)
+		ingredientNames = ConvertIngredientsToStringArray(ingredientProvider.FetchAllIngredients());
+        displayedIngredients = (ArrayList<String>) ingredientNames.clone();
+		ingredientListAdapter = new IngredientListAdapter(this, android.R.layout.simple_list_item_multiple_choice, displayedIngredients);
+
+		listView.setAdapter(ingredientListAdapter);
+         
+		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+		listView.setOnItemClickListener(new OnItemClickListener(){
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+			{
+				boolean currentlyChecked = checkedStates.get(position);
+				checkedStates.set(position, !currentlyChecked);
+        		 
+				CheckedTextView markedItem = (CheckedTextView) view;
+				markedItem.setChecked(checkedStates.get(position));
+			}
+		});
+	}
+	
+	private ArrayList<String> ConvertIngredientsToStringArray(ArrayList<Ingredient> ingredients) {
+		checkedStates = new ArrayList<Boolean>();
+		ArrayList<String> ingredientNames = new ArrayList<String>();
+		for(Ingredient i: ingredients)
         {
            ingredientNames.add(i.getName());
            checkedStates.add(false);
         }
-        
-         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-                 sa, 
-                 android.R.layout.simple_list_item_multiple_choice,
-                 ingredientNames );
-
-         lv.setAdapter(arrayAdapter);
-         
-         lv.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-         lv.setOnItemClickListener(new OnItemClickListener(){
-        	 public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-        	 {
-        		 boolean currentlyChecked = checkedStates.get(position);
-                 checkedStates.set(position, !currentlyChecked);
-        		 
-                 CheckedTextView markedItem = (CheckedTextView) view;
-                 markedItem.setChecked(checkedStates.get(position));
-        	 }
-         });
+		return ingredientNames;
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
