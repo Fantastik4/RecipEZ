@@ -4,27 +4,34 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Timer;
+import java.util.concurrent.Semaphore;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 public class UserVerification {
 	private boolean isValid = false;
-	private boolean validationReady = true;
+	private final Semaphore verificationAvailable = new Semaphore(1, true);
 	public UserVerification(){}
 	
 	public synchronized boolean validate(String u, String p){
-		validationReady = false;
-		ValidateUser(u, p);
-		long startTime = System.currentTimeMillis();
-		while(!validationReady)
+		try {
+			ValidateUser(u, p);
+			verificationAvailable.acquire();
+			return isValid;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}finally
 		{
-			if(System.currentTimeMillis() - startTime > 10000) return false; // timeout
+			verificationAvailable.release();
 		}
-		return isValid;
+		
 	}
 
-	public void ValidateUser (final String name, final String pass) {
+	public void ValidateUser (final String name, final String pass) throws InterruptedException {
+		verificationAvailable.acquire();
 		Thread thread = new Thread(new Runnable(){
 			@Override
 			public void run() {
@@ -79,12 +86,13 @@ public class UserVerification {
 					if(value.equals("true")){
 						isValid = true;
 					}
-					validationReady = true;
 				}
 				event = myParser.next();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			verificationAvailable.release();
 		}
 	}
 }

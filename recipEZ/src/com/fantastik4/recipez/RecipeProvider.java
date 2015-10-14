@@ -30,28 +30,22 @@ public class RecipeProvider {
 		{
 			recipesAvailable.release();
 		}
-//		recipesReady = false;
-		
-//		long startTime = System.currentTimeMillis();
-//		while(!recipesReady)
-//		{
-//			if(System.currentTimeMillis() - startTime > 10000) return null; // timeout
-//		}
-		
-		
-		
 	}
 	
 	public ArrayList<Recipe> FetchRecipesByIngredientID(String ingredientID)
 	{
-//		recipesReady = false;
-//		GetRecipesByIngredientID(ingredientID);
-//		long startTime = System.currentTimeMillis();
-//		while(!recipesReady)
-//		{
-//			if(System.currentTimeMillis() - startTime > 10000) return null; // timeout
-//		}
-		return recipes;
+		try {
+			GetRecipesByIngredientID(ingredientID);
+			recipesAvailable.acquire();
+			return recipes;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}finally
+		{
+			recipesAvailable.release();
+		}
 	}
 
 	
@@ -107,8 +101,9 @@ public class RecipeProvider {
 		}
 	}
 	
-	private void GetRecipesByIngredientID(final String ingredientID)
+	private void GetRecipesByIngredientID(final String ingredientID) throws InterruptedException
 	{
+		recipesAvailable.acquire();
 		Thread thread = new Thread(new Runnable(){
             @Override
             public void run() {
