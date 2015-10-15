@@ -23,12 +23,14 @@ public class SearchActivity extends Activity {
 	ArrayList<Boolean> checkedStates;
 	Button search;
 	SearchView searchField;
+	String currentUsername;
 	ArrayList<String> ingredientNames, displayedIngredients;
 	IngredientListAdapter ingredientListAdapter;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_search);
+		currentUsername = (String) getIntent().getSerializableExtra("CurrentUserName");
 		
 		ingredientProvider = new IngredientProvider();
 		checkedStates = new ArrayList<Boolean>();
