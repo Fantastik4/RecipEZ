@@ -1,16 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name"></string>
     <string name="action_settings">Settings</string>
-    <string name="username">Username</string>
-    <string name="password">Password</string>
-    <string name="login">LOGIN</string>
+    <string name="usernameHint"><font size = "12">Username</font></string>
+    <string name="passwordHint"><font size = "12">Password</font></string>
+    <string name="login">Login</string>
     <string name="signup">Not a member? Sign up now.</string>
     <string name="logo">logoForSignupPage</string>
     <string name="emptyFields">All fields are required!</string>
     <string name="invalidCredentials">Username and Password are invalid!</string>
     <string name="searchRefrigerator">FIND FOOD</string>
     <string-array name="recipeNames"></string-array>
+    <color name="background">#0EC0D6</color>
+    <color name="loginButton">#057B8B</color>
+    <color name="white">#FFFFFF</color>
+    <dimen name="standardHeight">40dp</dimen>
+    <dimen name="standardWidth">225dp</dimen>
 
 </resources>

@@ -8,64 +8,66 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.fantastik4.recipez.LoginActivity" >
+    tools:context="com.fantastik4.recipez.LoginActivity"
+    android:background="@color/background" >
 
     <ImageView
         android:id="@+id/recipezLogo"
-        android:contentDescription="@string/logo"
-        android:layout_gravity="center_horizontal"
-        android:layout_height="125dp"
         android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/logo"
         android:src="@drawable/logo" />
 
     <EditText
         android:id="@+id/username"
-        android:alpha="1"
-        android:background="@android:color/transparent"
         android:cursorVisible="false"
-        android:drawableEnd="@drawable/loginicon"
-        android:drawableRight="@drawable/loginicon"
+        android:drawableStart="@drawable/icon_username"
+        android:drawableLeft="@drawable/icon_username"
+        android:drawablePadding="10dp"
         android:ems="10"
         android:fontFamily="sans-serif"
-        android:hint="@string/username"
+        android:hint="@string/usernameHint"
+        android:textSize="12sp"
         android:inputType="textPersonName"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/standardHeight"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="25dp"
-        android:layout_width="250dp"
-        android:paddingEnd="10dp"
-        android:paddingStart="10dp">
-
+        android:layout_width="@dimen/standardWidth"
+        android:background="@color/white">
         <requestFocus />
+        
     </EditText>
 
     <EditText
         android:id="@+id/password"
-        android:alpha="1"
-        android:background="@android:color/transparent"
         android:cursorVisible="false"
-        android:drawableEnd="@drawable/passwordicon"
-        android:drawableRight="@drawable/passwordicon"
+        android:drawableStart="@drawable/icon_password"
+        android:drawableLeft="@drawable/icon_password"
+        android:drawablePadding="10dp"
         android:ems="10"
         android:fontFamily="sans-serif"
-        android:hint="@string/password"
+        android:hint="@string/passwordHint"
+        android:textSize="12sp"
         android:inputType="textPassword"
         android:layout_gravity="center_horizontal"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/standardHeight"
         android:layout_marginTop="5dp"
-        android:layout_width="250dp"
-        android:paddingEnd="10dp"
-        android:paddingStart="10dp"/>
+        android:layout_width="@dimen/standardWidth"
+        android:background="@color/white"/>
 
     <Button
-        android:id="@+id/signIn"
-        android:fontFamily="sans-serif"
+        android:id="@+id/login"
+        android:layout_width="@dimen/standardWidth"
+        android:layout_height="@dimen/standardHeight"
         android:layout_gravity="center_horizontal"
-        android:layout_height="50dp"
         android:layout_marginTop="10dp"
-        android:layout_width="250dp"
+        android:fontFamily="sans-serif"
+        android:onClick="validate"
         android:text="@string/login"
-        android:onClick="validate"/>
+        android:background="@color/loginButton"
+        android:textColor="@color/white"
+        android:stateListAnimator="@null"/>
     
     <EditText
         android:id="@+id/error_message"
@@ -102,6 +104,7 @@
         android:fontFamily="sans-serif"
         android:inputType="text"
         android:text="@string/signup"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        android:textColor="@color/white"/>
 
 </LinearLayout>

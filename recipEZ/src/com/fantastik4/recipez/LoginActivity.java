@@ -17,7 +17,11 @@ public class LoginActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInsanceState) {
 		super.onCreate(savedInsanceState);
 		setContentView(R.layout.activity_main);
-		login = (Button) findViewById(R.id.signIn);
+		
+		getSupportActionBar().hide();
+		getSupportActionBar().setElevation(0);
+		
+		login = (Button) findViewById(R.id.login);
 		login.setClickable(false);
 
 		login.setOnClickListener(new OnClickListener() {
