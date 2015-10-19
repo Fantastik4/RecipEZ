@@ -11,10 +11,11 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 public class UserVerification {
 	private boolean isValid = false;
+	private boolean registered = false;
 	private final Semaphore verificationAvailable = new Semaphore(1, true);
 	public UserVerification(){}
 	
-	public synchronized boolean validate(String u, String p){
+	public boolean validate(String u, String p){
 		try {
 			ValidateUser(u, p);
 			verificationAvailable.acquire();
@@ -30,6 +31,40 @@ public class UserVerification {
 		
 	}
 
+	public void RegisterUser(final String username, final String userId)
+	{
+		Thread thread = new Thread(new Runnable(){
+			@Override
+			public void run() {
+				try {
+					XmlPullParserFactory xmlFactoryObject;
+					URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/VerificationServices/RegisterUser/"+username+"/"+userId);
+					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+
+					conn.setReadTimeout(10000 /* milliseconds */);
+					conn.setConnectTimeout(15000 /* milliseconds */);
+					conn.setRequestMethod("GET");
+					conn.setDoInput(true);
+					conn.connect();
+
+					InputStream stream = conn.getInputStream();
+
+					xmlFactoryObject = XmlPullParserFactory.newInstance();
+					XmlPullParser myParser = xmlFactoryObject.newPullParser();
+
+					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+					myParser.setInput(stream, null);
+					//
+					stream.close();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
+	}
+	
 	public void ValidateUser (final String name, final String pass) throws InterruptedException {
 		verificationAvailable.acquire();
 		Thread thread = new Thread(new Runnable(){

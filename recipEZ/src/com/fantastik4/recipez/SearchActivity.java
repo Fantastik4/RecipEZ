@@ -62,11 +62,7 @@ public class SearchActivity extends Activity {
 			}
 			
 		});
-		
-		
 		PopulateIngredientList();
-		
-		
 	}
 
 	private void UpdateDisplayedIngredients(String searchArg) 
