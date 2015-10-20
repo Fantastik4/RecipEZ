@@ -18,6 +18,7 @@ public class IngredientProvider {
 	{
 		
 	}
+	
 	public ArrayList<Ingredient> FetchAllIngredients()
 	{
 		try {
@@ -34,6 +35,23 @@ public class IngredientProvider {
 		
 	}
 	
+	public ArrayList<Ingredient> FetchIngredientsByUserID(String userID)
+	{
+		try {
+			GetIngredientsByUserID(userID);
+			ingredientsAvailable.acquire();
+			return ingredients;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}finally{
+			ingredientsAvailable.release();
+		}
+	}
+	
+	
+
 	public ArrayList<Ingredient> FetchIngredientsByRecipeID(String recipeID)
 	{
 		try {
@@ -161,4 +179,40 @@ public class IngredientProvider {
         });
         thread.start();
     }
+	
+	private void GetIngredientsByUserID(final String userID) throws InterruptedException 
+	{
+		ingredientsAvailable.acquire();
+		Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+            		XmlPullParserFactory xmlFactoryObject;
+            		String urlString = "http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/FetchIngredientsByUserID/" + userID;
+                    URL url = new URL(urlString);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+
+                    conn.setReadTimeout(10000 /* milliseconds */);
+                    conn.setConnectTimeout(15000 /* milliseconds */);
+                    conn.setRequestMethod("GET");
+                    conn.setDoInput(true);
+                    conn.connect();
+
+                    InputStream stream = conn.getInputStream();
+
+                    xmlFactoryObject = XmlPullParserFactory.newInstance();
+                    XmlPullParser myParser = xmlFactoryObject.newPullParser();
+
+                    myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+                    myParser.setInput(stream, null);
+                    ParseIngredientsFromXML(myParser);
+                    stream.close();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+	}
 }

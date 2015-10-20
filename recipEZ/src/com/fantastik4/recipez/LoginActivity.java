@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.text.TextUtils;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
@@ -19,12 +24,25 @@ public class LoginActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		login = (Button) findViewById(R.id.signIn);
 		login.setClickable(false);
+		
+		try {
+			userVerify.RegisterUser("brianchan", "password");
+			userVerify.RegisterUser("napoleanf", "password");
+			userVerify.RegisterUser("thomasn", "password");
+			userVerify.RegisterUser("chrisrep", "password");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		login.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-
+				
 				EditText usernameCheck = (EditText) findViewById(R.id.username);
 				String username = usernameCheck.getText().toString().trim();
 				EditText passwordCheck = (EditText) findViewById(R.id.password);
