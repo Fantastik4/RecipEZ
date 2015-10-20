@@ -41,6 +41,9 @@ public class UserVerification {
 		return isValid;
 	}
 
+	/*
+	 * Registers User
+	 */
 	public void RegisterUser(final String username, final String password) throws NoSuchAlgorithmException, InvalidKeySpecException
 	{
 		final String passHash = PasswordHash.createHash(password);
@@ -111,6 +114,9 @@ public class UserVerification {
 //		thread.start();
 //	}
 	
+	/*
+	 * Gets HashedPassword from Webservice
+	 */
 	private void GetHashword(final String name) throws InterruptedException, NoSuchAlgorithmException, InvalidKeySpecException {
 		verificationAvailable.acquire();
 		Thread thread = new Thread(new Runnable(){
@@ -145,6 +151,9 @@ public class UserVerification {
 		thread.start();
 	}
 
+	/*
+	 * Parses Hashword
+	 */
 	private void ParseHashword(XmlPullParser myParser) 
 	{
 		int event;
@@ -175,35 +184,35 @@ public class UserVerification {
 		}
 	}
 
-	private void ParseVerification(XmlPullParser myParser) 
-	{
-		int event;
-		String value = "", text = "";
-		try {
-			event = myParser.getEventType();
-			while (event != XmlPullParser.END_DOCUMENT) {
-				String name=myParser.getName();
-				switch (event){
-				case XmlPullParser.START_TAG:
-					if(name.equals("verificationResponse")){
-						if(myParser.next() == XmlPullParser.TEXT) 
-						{ 
-							text = myParser.getText();
-						}
-						value = text;
-					}
-					break;
-				case XmlPullParser.END_TAG:
-					if(value.equals("true")){
-						isValid = true;
-					}
-				}
-				event = myParser.next();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			verificationAvailable.release();
-		}
-	}
+//	private void ParseVerification(XmlPullParser myParser) 
+//	{
+//		int event;
+//		String value = "", text = "";
+//		try {
+//			event = myParser.getEventType();
+//			while (event != XmlPullParser.END_DOCUMENT) {
+//				String name=myParser.getName();
+//				switch (event){
+//				case XmlPullParser.START_TAG:
+//					if(name.equals("verificationResponse")){
+//						if(myParser.next() == XmlPullParser.TEXT) 
+//						{ 
+//							text = myParser.getText();
+//						}
+//						value = text;
+//					}
+//					break;
+//				case XmlPullParser.END_TAG:
+//					if(value.equals("true")){
+//						isValid = true;
+//					}
+//				}
+//				event = myParser.next();
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}finally{
+//			verificationAvailable.release();
+//		}
+//	}
 }
