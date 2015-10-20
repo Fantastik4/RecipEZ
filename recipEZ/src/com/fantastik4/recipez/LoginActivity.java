@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.text.TextUtils;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
+
 import android.content.Intent;
 import android.widget.EditText;
 import android.view.View.OnClickListener;
@@ -24,9 +29,11 @@ public class LoginActivity extends ActionBarActivity {
 
 			@Override
 			public void onClick(View v) {
-
+				
 				EditText usernameCheck = (EditText) findViewById(R.id.username);
+				String username = usernameCheck.getText().toString().trim();
 				EditText passwordCheck = (EditText) findViewById(R.id.password);
+				String password = passwordCheck.getText().toString().trim();
 
 				EditText displayErrorMessage = (EditText) findViewById(R.id.error_message);
 
@@ -37,14 +44,16 @@ public class LoginActivity extends ActionBarActivity {
 					displayErrorMessage.setText(getResources().getString(R.string.emptyFields));
 
 				} else {
-					if(ValidateUserCredentials(usernameCheck.getText().toString().trim(), passwordCheck.getText().toString().trim())) {
+					if(ValidateUserCredentials(username, password)) {
 						//Valid credentials
-
+						
 						displayErrorMessage.setVisibility(View.INVISIBLE);
 						Intent i = new Intent(LoginActivity.this, SearchActivity.class);
-
+						i.putExtra("CurrentUserName", username);
 						startActivity(i);
 						overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+						
+						
 					} else {
 						//Invalid credentials
 						displayErrorMessage.setVisibility(View.VISIBLE);
