@@ -24,19 +24,6 @@ public class LoginActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		login = (Button) findViewById(R.id.signIn);
 		login.setClickable(false);
-		
-		try {
-			userVerify.RegisterUser("brianchan", "password");
-			userVerify.RegisterUser("napoleanf", "password");
-			userVerify.RegisterUser("thomasn", "password");
-			userVerify.RegisterUser("chrisrep", "password");
-		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvalidKeySpecException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		login.setOnClickListener(new OnClickListener() {
 
