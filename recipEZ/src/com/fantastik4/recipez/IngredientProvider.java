@@ -19,6 +19,10 @@ public class IngredientProvider {
 		
 	}
 	
+	/**
+	 * Fetches all ingredients
+	 * @return
+	 */
 	public ArrayList<Ingredient> FetchAllIngredients()
 	{
 		try {
@@ -35,6 +39,11 @@ public class IngredientProvider {
 		
 	}
 	
+	/**
+	 * Fetches all ingredients of userID
+	 * @param userID
+	 * @return
+	 */
 	public ArrayList<Ingredient> FetchIngredientsByUserID(String userID)
 	{
 		try {
@@ -50,8 +59,11 @@ public class IngredientProvider {
 		}
 	}
 	
-	
-
+	/**
+	 * Fetches all ingredients of recipeID
+	 * @param recipeID
+	 * @return
+	 */
 	public ArrayList<Ingredient> FetchIngredientsByRecipeID(String recipeID)
 	{
 		try {
@@ -66,6 +78,38 @@ public class IngredientProvider {
 			ingredientsAvailable.release();
 		}
 		
+	}
+	
+	/**
+	 * Adds ingredientId and userId to User_Ingredients table of DB
+	 * @param userId
+	 * @param ingredientId
+	 */
+	public void AddIngredientToUser(final String userId, final String ingredientId)
+	{
+		Thread thread = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                try {
+            		String urlString = "http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/AddIngredientToUser/" + userId + "/" + ingredientId;
+                    URL url = new URL(urlString);
+                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+
+                    conn.setReadTimeout(10000 /* milliseconds */);
+                    conn.setConnectTimeout(15000 /* milliseconds */);
+                    conn.setRequestMethod("GET");
+                    conn.setDoInput(true);
+                    conn.connect();
+
+                    InputStream stream = conn.getInputStream();
+                    stream.close();
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
 	}
 	
 	private void ParseIngredientsFromXML(XmlPullParser myParser) 
