@@ -12,7 +12,6 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 public class UserVerification {
-	private boolean isValid = false;
 	private boolean registered = false;
 	private String hashword;
 	private final Semaphore verificationAvailable = new Semaphore(1, true);
@@ -22,6 +21,7 @@ public class UserVerification {
 		try {
 			GetHashword(u);
 			verificationAvailable.acquire();
+			if(hashword.equals("null")) return false;
 			return PasswordHash.validatePassword(p, hashword);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -37,8 +37,7 @@ public class UserVerification {
 		{
 			verificationAvailable.release();
 		}
-		
-		return isValid;
+		return false;
 	}
 
 	/*
