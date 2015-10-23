@@ -7,7 +7,7 @@ package com.fantastik4.recipez;
  */
 public class User {
 	private String userID;
-	private String name;
+	private String username;
 	/**
 	 * Constructor for the User object
 	 * @param id String value of the user ID
@@ -19,6 +19,10 @@ public class User {
 	}
 	public User() {
 		// TODO Auto-generated constructor stub
+	}
+	public User(String username) 
+	{
+		this.username = username;
 	}
 	/**
 	 * Getter method for user ID
@@ -39,13 +43,13 @@ public class User {
 	 * @return String value of the user's name
 	 */
 	public String getName() {
-		return name;
+		return username;
 	}
 	/**
 	 * Setter method for the user name
 	 * @param name String value to set the user's name to
 	 */
 	public void setName(String name) {
-		this.name = name;
+		this.username = name;
 	}
 }

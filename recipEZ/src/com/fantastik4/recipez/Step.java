@@ -19,7 +19,7 @@ public class Step {
 		this.stepID = id;
 		this.description = desc;
 	}
-	
+
 	public Step(String desc)
 	{
 		this.description = desc;
