@@ -47,7 +47,7 @@ public class RecipeProvider {
 			recipesAvailable.release();
 		}
 	}
-
+	
 	
 	
 	private void ParseRecipesFromXML(XmlPullParser myParser) 
