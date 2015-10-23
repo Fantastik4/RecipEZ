@@ -7,10 +7,10 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 
 public class IngredientListAdapter extends ArrayAdapter<String> {
-
-	private ArrayList<String> ingredients;
-	private Context context;
+	
 	private int resource;
+	private Context context;
+	private ArrayList<String> ingredients;
 	
 	public IngredientListAdapter(Context context, int resource, ArrayList<String> ingredients) {
 		super(context, resource, ingredients);

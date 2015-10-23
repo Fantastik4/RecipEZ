@@ -1,6 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/LinearLayout1"
+    android:id="@+id/activity_searchIngredients"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -10,32 +10,23 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fantastik4.recipez.SearchActivity" >
 
+    <!-- Search Field -->
+
     <SearchView
-        android:id="@+id/searchView1"
-        android:gravity="center"
+        android:id="@+id/sv_searchIngredients"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:layout_width="250dp">
-
+        android:gravity="center"
+        android:queryHint="@string/sv_query" >
     </SearchView>
 
-    <Button
-        android:id="@+id/findFood"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:fontFamily="sans-serif"
-        android:onClick="validate"
-        android:text="@string/searchRefrigerator" />
+    <!-- Ingredients List -->
 
     <ListView
-        android:id="@+id/recipeList"
+        android:id="@+id/lv_ingredientsList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:choiceMode="multipleChoice"
-        tools:listitem="@android:layout/simple_list_item_checked" >
-    </ListView>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

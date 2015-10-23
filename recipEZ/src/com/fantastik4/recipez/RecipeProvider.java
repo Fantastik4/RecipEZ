@@ -15,7 +15,7 @@ public class RecipeProvider {
 	public RecipeProvider()
 	{
 	}
-	
+
 	public ArrayList<Recipe> FetchAllRecipes()
 	{
 		try {
@@ -31,7 +31,7 @@ public class RecipeProvider {
 			recipesAvailable.release();
 		}
 	}
-	
+
 	public ArrayList<Recipe> FetchRecipesByIngredientID(String ingredientID)
 	{
 		try {
@@ -47,9 +47,9 @@ public class RecipeProvider {
 			recipesAvailable.release();
 		}
 	}
-	
-	
-	
+
+
+
 	private void ParseRecipesFromXML(XmlPullParser myParser) 
 	{
 		int event;
@@ -64,7 +64,7 @@ public class RecipeProvider {
 				String name=myParser.getName();
 				switch (event){
 				case XmlPullParser.START_TAG:
-					
+
 
 					if(name.equals("id"))
 					{
@@ -100,74 +100,74 @@ public class RecipeProvider {
 			recipesAvailable.release();
 		}
 	}
-	
+
 	private void GetRecipesByIngredientID(final String ingredientID) throws InterruptedException
 	{
 		recipesAvailable.acquire();
 		Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                try {
-            		XmlPullParserFactory xmlFactoryObject;
-            		String urlString = "http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/FetchRecipesByIngredientID/" + ingredientID;
-                    URL url = new URL(urlString);
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			@Override
+			public void run() {
+				try {
+					XmlPullParserFactory xmlFactoryObject;
+					String urlString = "http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/FetchRecipesByIngredientID/" + ingredientID;
+					URL url = new URL(urlString);
+					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
-                    conn.setReadTimeout(10000 /* milliseconds */);
-                    conn.setConnectTimeout(15000 /* milliseconds */);
-                    conn.setRequestMethod("GET");
-                    conn.setDoInput(true);
-                    conn.connect();
+					conn.setReadTimeout(10000 /* milliseconds */);
+					conn.setConnectTimeout(15000 /* milliseconds */);
+					conn.setRequestMethod("GET");
+					conn.setDoInput(true);
+					conn.connect();
 
-                    InputStream stream = conn.getInputStream();
+					InputStream stream = conn.getInputStream();
 
-                    xmlFactoryObject = XmlPullParserFactory.newInstance();
-                    XmlPullParser myParser = xmlFactoryObject.newPullParser();
+					xmlFactoryObject = XmlPullParserFactory.newInstance();
+					XmlPullParser myParser = xmlFactoryObject.newPullParser();
 
-                    myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-                    myParser.setInput(stream, null);
-                    ParseRecipesFromXML(myParser);
-                    stream.close();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
+					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+					myParser.setInput(stream, null);
+					ParseRecipesFromXML(myParser);
+					stream.close();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
 	}
-	
+
 	private void GetAllRecipesFromService() throws InterruptedException{
 		recipesAvailable.acquire();
 		Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                try {
-            		XmlPullParserFactory xmlFactoryObject;
-                    URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/FetchAllRecipes/");
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			@Override
+			public void run() {
+				try {
+					XmlPullParserFactory xmlFactoryObject;
+					URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/FetchAllRecipes/");
+					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
-                    conn.setReadTimeout(10000 /* milliseconds */);
-                    conn.setConnectTimeout(15000 /* milliseconds */);
-                    conn.setRequestMethod("GET");
-                    conn.setDoInput(true);
-                    conn.connect();
+					conn.setReadTimeout(10000 /* milliseconds */);
+					conn.setConnectTimeout(15000 /* milliseconds */);
+					conn.setRequestMethod("GET");
+					conn.setDoInput(true);
+					conn.connect();
 
-                    InputStream stream = conn.getInputStream();
+					InputStream stream = conn.getInputStream();
 
-                    xmlFactoryObject = XmlPullParserFactory.newInstance();
-                    XmlPullParser myParser = xmlFactoryObject.newPullParser();
+					xmlFactoryObject = XmlPullParserFactory.newInstance();
+					XmlPullParser myParser = xmlFactoryObject.newPullParser();
 
-                    myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-                    myParser.setInput(stream, null);
-                    ParseRecipesFromXML(myParser);
-                    stream.close();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-    }
+					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+					myParser.setInput(stream, null);
+					ParseRecipesFromXML(myParser);
+					stream.close();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
+	}
 }

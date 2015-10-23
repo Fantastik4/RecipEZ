@@ -57,36 +57,36 @@ public class HandleXML {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void fetchXML(){
-        Thread thread = new Thread(new Runnable(){
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL(urlString);
-                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+		Thread thread = new Thread(new Runnable(){
+			@Override
+			public void run() {
+				try {
+					URL url = new URL(urlString);
+					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
-                    conn.setReadTimeout(10000 /* milliseconds */);
-                    conn.setConnectTimeout(15000 /* milliseconds */);
-                    conn.setRequestMethod("GET");
-                    conn.setDoInput(true);
-                    conn.connect();
+					conn.setReadTimeout(10000 /* milliseconds */);
+					conn.setConnectTimeout(15000 /* milliseconds */);
+					conn.setRequestMethod("GET");
+					conn.setDoInput(true);
+					conn.connect();
 
-                    InputStream stream = conn.getInputStream();
+					InputStream stream = conn.getInputStream();
 
-                    xmlFactoryObject = XmlPullParserFactory.newInstance();
-                    XmlPullParser myparser = xmlFactoryObject.newPullParser();
+					xmlFactoryObject = XmlPullParserFactory.newInstance();
+					XmlPullParser myparser = xmlFactoryObject.newPullParser();
 
-                    myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-                    myparser.setInput(stream, null);
-                    parseXMLAndStoreIt(myparser);
-                    stream.close();
-                }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-    }
+					myparser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+					myparser.setInput(stream, null);
+					parseXMLAndStoreIt(myparser);
+					stream.close();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
+	}
 }

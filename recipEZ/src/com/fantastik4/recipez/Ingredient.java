@@ -11,7 +11,7 @@ public class Ingredient {
 	private String ingredientID;
 	private String name;
 	private String amount;
-	
+
 	/**
 	 * Constructor for an Ingredient object
 	 * @param id String value of the ingredient's ID
