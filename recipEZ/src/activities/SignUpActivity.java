@@ -1,4 +1,8 @@
-package com.fantastik4.recipez;
+package activities;
+
+import com.fantastik4.recipez.R;
+import com.fantastik4.recipez.R.id;
+import com.fantastik4.recipez.R.layout;
 
 import android.app.Activity;
 import android.graphics.Color;

@@ -1,4 +1,5 @@
-package com.fantastik4.recipez;
+package objects;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -7,12 +8,13 @@ import java.util.ArrayList;
  * @author Chris Repanich
  * @version 1.0
  */
-public class Recipe {
+public class Recipe implements Serializable {
 	//member variables
 	private String name;
 	private String recipeID;
-	private ArrayList<Step> recipeSteps;
-	private ArrayList<Ingredient> ingredients;
+	private String recipeDirections;
+	private String recipeDescription;
+	private String recipeIngredients;
 	/**
 	 * Constructor for a Recipe object
 	 * @param name String name of recipe
@@ -20,11 +22,9 @@ public class Recipe {
 	 * @param steps ArrayList of Step objects containing the steps of the recipe
 	 * @param ingr ArrayList of Ingredient objects holding the ingredients of the recipe
 	 */
-	public Recipe(String name, String id, ArrayList<Step> steps, ArrayList<Ingredient> ingr){
+	public Recipe(String name, String id){
 		this.setName(name);
 		this.setRecipeID(id);
-		this.setRecipeSteps(steps);
-		this.setIngredients(ingr);
 	}
 	public Recipe() {
 		// TODO Auto-generated constructor stub
@@ -57,32 +57,33 @@ public class Recipe {
 	public void setRecipeID(String recipeID) {
 		this.recipeID = recipeID;
 	}
-	/**
-	 * Getter method for Recipe Steps
-	 * @return ArrayList of Steps for the recipe
-	 */
-	public ArrayList<Step> getRecipeSteps() {
-		return recipeSteps;
+	
+	public String getRecipeDirections()
+	{
+		return this.recipeDirections;
 	}
-	/**
-	 * Setter method for Recipe Steps
-	 * @param recipeSteps ArrayList of Steps to set for the recipe
-	 */
-	public void setRecipeSteps(ArrayList<Step> recipeSteps) {
-		this.recipeSteps = recipeSteps;
+	
+	public void setRecipeDirections(String recipeDirections) {
+		this.recipeDirections = recipeDirections;
 	}
-	/**
-	 * Getter method for Recipe Ingredients
-	 * @return ArrayList of Ingredients in the recipe
-	 */
-	public ArrayList<Ingredient> getIngredients() {
-		return ingredients;
+	
+	public String getRecipeIngredients()
+	{
+		return this.recipeIngredients;
 	}
-	/**
-	 * Setter method for Recipe Ingredients
-	 * @param ingredients ArrayList of Ingredients to set in the recipe
-	 */
-	public void setIngredients(ArrayList<Ingredient> ingredients) {
-		this.ingredients = ingredients;
+	
+	public void setRecipeIngredientList(String recipeIngredientList) {
+		this.recipeIngredients = recipeIngredientList;
+		
+	}
+	
+	public String getRecipeDescription()
+	{
+		return this.recipeDescription;
+	}
+	
+	public void setRecipeDescription(String recipeDescription) {
+		this.recipeDescription = recipeDescription;
+		
 	}
 }

@@ -1,4 +1,4 @@
-package com.fantastik4.recipez;
+package objects;
 
 /**
  * Recipe Ingredient Class

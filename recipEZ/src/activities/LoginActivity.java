@@ -1,14 +1,22 @@
-package com.fantastik4.recipez;
+package activities;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.text.Spannable;
 import android.text.TextUtils;
+
+import com.fantastik4.recipez.R;
+import com.fantastik4.recipez.R.anim;
+import com.fantastik4.recipez.R.id;
+import com.fantastik4.recipez.R.layout;
+import com.fantastik4.recipez.R.string;
+
 import android.content.Intent;
 import android.graphics.Color;
 import android.widget.EditText;
 import android.widget.TextView;
+import resources.UserVerification;
 import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.view.View.OnClickListener;
@@ -100,7 +108,7 @@ public class LoginActivity extends ActionBarActivity {
 						//Valid credentials
 						displayErrorMessage.setVisibility(View.INVISIBLE);
 						Intent i = new Intent(LoginActivity.this, PortalActivity.class);
-						i.putExtra("CurrentUserName", username);
+						i.putExtra("CurrentUsername", username);
 
 						startActivity(i);
 						overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);

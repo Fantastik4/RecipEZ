@@ -1,4 +1,4 @@
-package com.fantastik4.recipez;
+package resources;
 
 import java.net.URL;
 import java.io.InputStream;

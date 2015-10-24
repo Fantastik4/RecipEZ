@@ -1,4 +1,4 @@
-package com.fantastik4.recipez;
+package objects;
 
 /**
  * User object for the application
