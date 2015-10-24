@@ -92,9 +92,6 @@ public class IngredientSearchActivity extends Activity {
 			public void onClick(View view)
 			{
 				AddIngredientsToFridge();
-				Intent i = new Intent(IngredientSearchActivity.this, EditListActivity.class);
-				i.putExtra("CurrentUsername", currentUsername);
-				startActivity(i);
 			}
 		});
 		
