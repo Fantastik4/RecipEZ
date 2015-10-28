@@ -25,7 +25,7 @@ public class PortalActivity extends Activity {
 		editList = (ImageButton)findViewById(R.id.btn_editListOption);
 		searchRecipes = (ImageButton)findViewById(R.id.btn_searchRecipesOption);
 		searchIngredients = (ImageButton)findViewById(R.id.btn_searchIngredientsOption);
-		
+
 		/**
 		 * Option 1: User chooses to search for recipes based on his current list of ingredients
 		 */
@@ -34,13 +34,13 @@ public class PortalActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(PortalActivity.this, RecipeResultsActivity.class);
-				
+
 				startActivity(i);
 				overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 			}
-			
+
 		});
-		
+
 		/**
 		 * Option 2: User chooses to search for ingredients
 		 */
@@ -53,9 +53,8 @@ public class PortalActivity extends Activity {
 				startActivity(i);
 				overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 			}
-			
 		});
-		
+
 		/**
 		 * Option 3: User chooses to edit his list of ingredients
 		 */
@@ -64,13 +63,14 @@ public class PortalActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(PortalActivity.this, EditListActivity.class);
-				
+				i.putExtra("Currentusername", username);
+				System.out.println(username);
 				startActivity(i);
 				overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 			}
 		});
 	}
-	
+
 	/**
 	 * Disables onBackPressd
 	 */

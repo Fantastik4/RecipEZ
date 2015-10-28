@@ -42,7 +42,7 @@
     <!-- Email Properties -->
 
     <EditText
-        android:id="@+id/et_registerEmail"
+        android:id="@+id/et_registerUsername"
         android:layout_width="@dimen/standardWidth"
         android:layout_height="@dimen/standardHeight"
         android:layout_gravity="center_horizontal"
@@ -50,10 +50,10 @@
         android:background="@color/white"
         android:cursorVisible="false"
         android:drawablePadding="10dp"
-        android:drawableStart="@drawable/email"
+        android:drawableStart="@drawable/username"
         android:ems="10"
-        android:hint="@string/hint_email"
-        android:inputType="textEmailAddress"
+        android:hint="@string/hint_registerUsername"
+        android:inputType="textPersonName"
         android:textSize="12sp" >
 
         <requestFocus />
@@ -70,7 +70,7 @@
         android:background="@color/white"
         android:cursorVisible="false"
         android:drawablePadding="10dp"
-        android:drawableStart="@drawable/password"
+        android:drawableStart="@drawable/confirmpassword"
         android:ems="10"
         android:hint="@string/hint_password"
         android:inputType="textPassword"
@@ -87,7 +87,7 @@
         android:background="@color/white"
         android:cursorVisible="false"
         android:drawablePadding="10dp"
-        android:drawableStart="@drawable/confirmpassword"
+        android:drawableStart="@drawable/password"
         android:ems="10"
         android:hint="@string/hint_confirmPassword"
         android:inputType="textPassword"
@@ -105,5 +105,23 @@
         android:onClick="validate"
         android:text="@string/buttonText_signUp"
         android:textColor="@color/white" />
+    
+    <!-- Error Message -->
+
+    <TextView
+        android:id="@+id/tv_errorMessage"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
+        android:clickable="false"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:gravity="center"
+        android:textColor="@color/red"
+        android:textSize="12sp"
+        android:visibility="invisible" />
 
 </LinearLayout>

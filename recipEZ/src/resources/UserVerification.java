@@ -16,6 +16,28 @@ public class UserVerification {
 	private String hashword;
 	private final Semaphore verificationAvailable = new Semaphore(1, true);
 	public UserVerification(){}
+	
+	public boolean validate(String u) {
+		try {
+			GetHashword(u);
+			verificationAvailable.acquire();
+			if(hashword.equals("null")) return false;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidKeySpecException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally
+		{
+			verificationAvailable.release();
+		}
+		return false;
+	}
 
 	public boolean validate(String u, String p){
 		try {
