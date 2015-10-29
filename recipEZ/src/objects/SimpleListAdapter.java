@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.widget.ArrayAdapter;
 
+@SuppressWarnings("unused")
 public class SimpleListAdapter extends ArrayAdapter<String> {
 	
 	private int resource;

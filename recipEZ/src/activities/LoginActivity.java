@@ -5,19 +5,13 @@ import android.view.View;
 import android.widget.Button;
 import android.text.Spannable;
 import android.text.TextUtils;
-
-import com.fantastik4.recipez.R;
-import com.fantastik4.recipez.R.anim;
-import com.fantastik4.recipez.R.id;
-import com.fantastik4.recipez.R.layout;
-import com.fantastik4.recipez.R.string;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.widget.EditText;
 import android.widget.TextView;
-import resources.UserVerification;
+import com.fantastik4.recipez.R;
 import android.graphics.Typeface;
+import resources.UserVerification;
 import android.text.SpannableString;
 import android.view.View.OnClickListener;
 import android.text.style.ForegroundColorSpan;

@@ -3,20 +3,20 @@ package resources;
 import java.net.URL;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
+import org.xmlpull.v1.XmlPullParser;
 import java.util.concurrent.Semaphore;
+import org.xmlpull.v1.XmlPullParserFactory;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
 public class UserVerification {
-	private boolean registered = false;
+
 	private String hashword;
 	private final Semaphore verificationAvailable = new Semaphore(1, true);
-	public UserVerification(){}
-	
+
+	public UserVerification(){
+	}
+
 	public boolean validate(String u) {
 		try {
 			GetHashword(u);
@@ -32,8 +32,7 @@ public class UserVerification {
 		} catch (InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally
-		{
+		} finally {
 			verificationAvailable.release();
 		}
 		return false;
@@ -55,8 +54,7 @@ public class UserVerification {
 		} catch (InvalidKeySpecException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally
-		{
+		} finally {
 			verificationAvailable.release();
 		}
 		return false;
@@ -65,8 +63,7 @@ public class UserVerification {
 	/*
 	 * Registers User
 	 */
-	public void RegisterUser(final String username, final String password) throws NoSuchAlgorithmException, InvalidKeySpecException
-	{
+	public void RegisterUser(final String username, final String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		final String passHash = PasswordHash.createHash(password);
 
 		Thread thread = new Thread(new Runnable(){
@@ -175,8 +172,7 @@ public class UserVerification {
 	/*
 	 * Parses Hashword
 	 */
-	private void ParseHashword(XmlPullParser myParser) 
-	{
+	private void ParseHashword(XmlPullParser myParser) {
 		int event;
 		String value = "", text = "";
 		try {
@@ -200,7 +196,7 @@ public class UserVerification {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		}finally {
 			verificationAvailable.release();
 		}
 	}

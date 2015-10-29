@@ -3,6 +3,8 @@
 
     <string name="app_name"></string>
     <string name="logo_name">RecipEZ</string>
+    <string name="btn_addToFridge">Add To Fridge</string>
+    <string name="btn_getRecipes">Get Recipes</string>
     <string name="buttonText_login">Login</string>
     <string name="buttonText_register">Not a member? Register now!</string>
     <string name="buttonText_signUp">Sign Up</string>
@@ -15,6 +17,9 @@
     <string name="errorMessage_UsernameTaken">Username is already taken!</string>
     <string name="errorMessage_PasswordsMustMatch">Passwords must match!</string>
     <string name="errorMessage_SignUpRequirements">Username and Password must be between 6 and 20 characters!</string>
+    <string name="label_recipeDescription">Description</string>
+    <string name="label_recipeIngredients">Ingredients</string>
+    <string name="label_recipeDirections">Directions</string>
     <string name="logoDescription">RecipEZ</string>
     <string name="contentDescription_searchRecipes">Search Recipes</string>
     <string name="contentDescription_searchIngredients">Search Ingredients</string>
@@ -30,9 +35,10 @@
     <dimen name="standardWidth">225dp</dimen>
     <dimen name="square">125dp</dimen>
 
-    <string name="title_activity_search_recipes">SearchRecipesActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_search_recipes">SearchRecipesActivity</string>
     <string name="title_activity_edit_list">EditListActivity</string>
     <string name="title_activity_display_recipe">DisplayRecipe</string>
+    <string name="title_activity_user_recipes">UserRecipesActivity</string>
 
 </resources>

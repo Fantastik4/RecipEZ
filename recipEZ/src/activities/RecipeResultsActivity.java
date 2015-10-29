@@ -1,40 +1,32 @@
 package activities;
 
+import objects.Recipe;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.CheckedTextView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
-import objects.Recipe;
-import objects.SimpleListAdapter;
-
 import java.util.ArrayList;
-
-import com.fantastik4.recipez.R;
-import com.fantastik4.recipez.R.id;
-import com.fantastik4.recipez.R.layout;
-
 import android.app.Activity;
 import android.content.Intent;
+import android.widget.ListView;
+import com.fantastik4.recipez.R;
+import objects.SimpleListAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class RecipeResultsActivity extends Activity {
 	private ArrayList<Recipe> recipeResults;
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		recipeResults = (ArrayList<Recipe>) getIntent().getSerializableExtra("RecipeResults");
 		setContentView(R.layout.activity_search_recipes);
 
+		recipeResults = (ArrayList<Recipe>) getIntent().getSerializableExtra("RecipeResults");
 		PopulateRecipeList();
-
 	}
 
+	@SuppressWarnings("unchecked")
 	private void PopulateRecipeList() {
 		ListView listView = (ListView)findViewById(R.id.lv_recipeList);		
 
@@ -66,6 +58,7 @@ public class RecipeResultsActivity extends Activity {
 	private ArrayList<String> GetNamesOfRecipes() {
 
 		ArrayList<String> recipeNames = new ArrayList<String>();
+		
 		for(Recipe r: recipeResults) {
 			recipeNames.add(r.getName());
 		}

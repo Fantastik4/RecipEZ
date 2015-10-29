@@ -1,32 +1,28 @@
 package activities;
 
+import objects.Model;
 import android.os.Bundle;
+import objects.Ingredient;
+import java.util.ArrayList;
+import android.app.Activity;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SearchView;
-import objects.CheckedListViewAdapter;
-import objects.Ingredient;
-import objects.Model;
-
-import java.util.ArrayList;
-
 import com.fantastik4.recipez.R;
+import android.widget.SearchView;
 import resources.IngredientProvider;
-import com.fantastik4.recipez.R.layout;
-
-import android.app.Activity;
+import objects.CheckedListViewAdapter;
 
 public class EditListActivity extends Activity {
 
 	
+	String userID;
+	ListView listView;
 	SearchView searchField;
 	Button findRecipes, addToFridge;
-	String userID;
 	ArrayList<Ingredient> ingredients;
 	IngredientProvider ingredientProvider;
 	CheckedListViewAdapter ingredientListAdapter;
 	ArrayList<Model> displayedIngredients, ingredientNames;
-	ListView listView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +34,7 @@ public class EditListActivity extends Activity {
 		PopulateIngredientList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	private void PopulateIngredientList() {
 		listView = (ListView)findViewById(R.id.lv_userList);		
 

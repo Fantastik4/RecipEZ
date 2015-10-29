@@ -1,6 +1,6 @@
 package objects;
+
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Class for Recipe objects
@@ -8,13 +8,16 @@ import java.util.ArrayList;
  * @author Chris Repanich
  * @version 1.0
  */
+@SuppressWarnings("serial")
 public class Recipe implements Serializable {
+
 	//member variables
 	private String name;
 	private String recipeID;
 	private String recipeDirections;
 	private String recipeDescription;
 	private String recipeIngredients;
+
 	/**
 	 * Constructor for a Recipe object
 	 * @param name String name of recipe
@@ -26,9 +29,11 @@ public class Recipe implements Serializable {
 		this.setName(name);
 		this.setRecipeID(id);
 	}
+
 	public Recipe() {
 		// TODO Auto-generated constructor stub
 	}
+
 	/**
 	 * Getter method for name
 	 * @return String value of Recipe name
@@ -36,6 +41,7 @@ public class Recipe implements Serializable {
 	public String getName() {
 		return name;
 	}
+
 	/**
 	 * Setter method for name
 	 * @param name String parameter of the name for the recipe
@@ -43,6 +49,7 @@ public class Recipe implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	/**
 	 * Getter method for recipe id
 	 * @return String value of recipe id
@@ -50,6 +57,7 @@ public class Recipe implements Serializable {
 	public String getRecipeID() {
 		return recipeID;
 	}
+
 	/**
 	 * Setter method for recipe id
 	 * @param recipeID String value of recipe id to set
@@ -57,33 +65,28 @@ public class Recipe implements Serializable {
 	public void setRecipeID(String recipeID) {
 		this.recipeID = recipeID;
 	}
-	
-	public String getRecipeDirections()
-	{
+
+	public String getRecipeDirections() {
 		return this.recipeDirections;
 	}
-	
+
 	public void setRecipeDirections(String recipeDirections) {
 		this.recipeDirections = recipeDirections;
 	}
-	
-	public String getRecipeIngredients()
-	{
+
+	public String getRecipeIngredients() {
 		return this.recipeIngredients;
 	}
-	
+
 	public void setRecipeIngredientList(String recipeIngredientList) {
 		this.recipeIngredients = recipeIngredientList;
-		
 	}
-	
-	public String getRecipeDescription()
-	{
+
+	public String getRecipeDescription() {
 		return this.recipeDescription;
 	}
-	
+
 	public void setRecipeDescription(String recipeDescription) {
 		this.recipeDescription = recipeDescription;
-		
 	}
 }

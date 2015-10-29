@@ -1,24 +1,20 @@
 package activities;
 
-import com.fantastik4.recipez.R;
-import com.fantastik4.recipez.R.id;
-import com.fantastik4.recipez.R.layout;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.TextUtils;
-import android.text.style.ForegroundColorSpan;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.app.Activity;
 import android.widget.Button;
+import android.graphics.Color;
+import android.text.Spannable;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.fantastik4.recipez.R;
+import android.graphics.Typeface;
 import resources.UserVerification;
+import android.text.SpannableString;
+import android.view.View.OnClickListener;
+import android.text.style.ForegroundColorSpan;
 
 public class SignUpActivity extends Activity {
 
@@ -113,7 +109,7 @@ public class SignUpActivity extends Activity {
 						else {
 							if (username.length() >= 6 && username.length() <= 20) {
 								if (password.length() >= 6 && password.length() <= 20) {
-									
+
 									//Requirements have been met - Create User
 									//displayErrorMessage.setVisibility(View.INVISIBLE);
 									//Intent i = new Intent(SignUpActivity.this, PortalActivity.class);
@@ -121,7 +117,7 @@ public class SignUpActivity extends Activity {
 
 									//startActivity(i);
 									//overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
-									
+
 									System.out.println("User created!");
 								}
 							}

@@ -27,10 +27,10 @@
  */
 package resources;
 
+import java.math.BigInteger;
 import java.security.SecureRandom;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.SecretKeyFactory;
-import java.math.BigInteger;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -39,8 +39,7 @@ import java.security.spec.InvalidKeySpecException;
  * Author: havoc AT defuse.ca
  * www: http://crackstation.net/hashing-security.htm
  */
-public class PasswordHash
-{
+public class PasswordHash {
 	public static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
 
 	// The following constants may be changed without breaking existing hashes.
@@ -48,9 +47,9 @@ public class PasswordHash
 	public static final int HASH_BYTE_SIZE = 24;
 	public static final int PBKDF2_ITERATIONS = 1000;
 
-	public static final int ITERATION_INDEX = 0;
 	public static final int SALT_INDEX = 1;
 	public static final int PBKDF2_INDEX = 2;
+	public static final int ITERATION_INDEX = 0;
 
 	/**
 	 * Returns a salted PBKDF2 hash of the password.
@@ -192,45 +191,45 @@ public class PasswordHash
 	 *
 	 * @param   args        ignored
 	 */
-//	public static void main(String[] args)
-//	{
-//		try
-//		{
-//			// Print out 10 hashes
-//			for(int i = 0; i < 10; i++)
-//				System.out.println(PasswordHash.createHash("p\r\nassw0Rd!"));
-//
-//			// Test password validation
-//			boolean failure = false;
-//			System.out.println("Running tests...");
-//			for(int i = 0; i < 100; i++)
-//			{
-//				String password = ""+i;
-//				String hash = createHash(password);
-//				String secondHash = createHash(password);
-//				if(hash.equals(secondHash)) {
-//					System.out.println("FAILURE: TWO HASHES ARE EQUAL!");
-//					failure = true;
-//				}
-//				String wrongPassword = ""+(i+1);
-//				if(validatePassword(wrongPassword, hash)) {
-//					System.out.println("FAILURE: WRONG PASSWORD ACCEPTED!");
-//					failure = true;
-//				}
-//				if(!validatePassword(password, hash)) {
-//					System.out.println("FAILURE: GOOD PASSWORD NOT ACCEPTED!");
-//					failure = true;
-//				}
-//			}
-//			if(failure)
-//				System.out.println("TESTS FAILED!");
-//			else
-//				System.out.println("TESTS PASSED!");
-//		}
-//		catch(Exception ex)
-//		{
-//			System.out.println("ERROR: " + ex);
-//		}
-//	}
+	//	public static void main(String[] args)
+	//	{
+	//		try
+	//		{
+	//			// Print out 10 hashes
+	//			for(int i = 0; i < 10; i++)
+	//				System.out.println(PasswordHash.createHash("p\r\nassw0Rd!"));
+	//
+	//			// Test password validation
+	//			boolean failure = false;
+	//			System.out.println("Running tests...");
+	//			for(int i = 0; i < 100; i++)
+	//			{
+	//				String password = ""+i;
+	//				String hash = createHash(password);
+	//				String secondHash = createHash(password);
+	//				if(hash.equals(secondHash)) {
+	//					System.out.println("FAILURE: TWO HASHES ARE EQUAL!");
+	//					failure = true;
+	//				}
+	//				String wrongPassword = ""+(i+1);
+	//				if(validatePassword(wrongPassword, hash)) {
+	//					System.out.println("FAILURE: WRONG PASSWORD ACCEPTED!");
+	//					failure = true;
+	//				}
+	//				if(!validatePassword(password, hash)) {
+	//					System.out.println("FAILURE: GOOD PASSWORD NOT ACCEPTED!");
+	//					failure = true;
+	//				}
+	//			}
+	//			if(failure)
+	//				System.out.println("TESTS FAILED!");
+	//			else
+	//				System.out.println("TESTS PASSED!");
+	//		}
+	//		catch(Exception ex)
+	//		{
+	//			System.out.println("ERROR: " + ex);
+	//		}
+	//	}
 
 }

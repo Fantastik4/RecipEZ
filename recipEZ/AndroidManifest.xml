@@ -48,6 +48,10 @@
             android:name="activities.DisplayRecipeActivity"
             android:label="@string/title_activity_display_recipe" >
         </activity>
+        <activity
+            android:name="activities.UserRecipesActivity"
+            android:label="@string/title_activity_user_recipes" >
+        </activity>
     </application>
 
 </manifest>

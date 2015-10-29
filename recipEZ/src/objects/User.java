@@ -6,8 +6,10 @@ package objects;
  * @version 1.0
  */
 public class User {
+
 	private String userID;
 	private String username;
+
 	/**
 	 * Constructor for the User object
 	 * @param id String value of the user ID
@@ -17,13 +19,15 @@ public class User {
 		this.setUserID(id);
 		this.setName(name);
 	}
+
 	public User() {
 		// TODO Auto-generated constructor stub
 	}
-	public User(String username) 
-	{
+
+	public User(String username)  {
 		this.username = username;
 	}
+
 	/**
 	 * Getter method for user ID
 	 * @return String value of the user id
@@ -31,6 +35,7 @@ public class User {
 	public String getUserID() {
 		return userID;
 	}
+
 	/**
 	 * Setter method for user id
 	 * @param userID String value to set the user id to
@@ -38,13 +43,16 @@ public class User {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
+
 	/**
 	 * Getter method for user name
 	 * @return String value of the user's name
 	 */
+
 	public String getName() {
 		return username;
 	}
+
 	/**
 	 * Setter method for the user name
 	 * @param name String value to set the user's name to

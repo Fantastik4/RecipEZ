@@ -1,17 +1,12 @@
 package activities;
 
-import com.fantastik4.recipez.R;
-import com.fantastik4.recipez.R.anim;
-import com.fantastik4.recipez.R.id;
-import com.fantastik4.recipez.R.layout;
-
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
+import android.app.Activity;
+import android.content.Intent;
+import com.fantastik4.recipez.R;
 import android.widget.ImageButton;
+import android.view.View.OnClickListener;
 
 public class PortalActivity extends Activity {
 
@@ -33,8 +28,9 @@ public class PortalActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent i = new Intent(PortalActivity.this, RecipeResultsActivity.class);
-
+				Intent i = new Intent(PortalActivity.this, UserRecipesActivity.class);
+				i.putExtra("CurrentUsername", username);
+				
 				startActivity(i);
 				overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 			}
