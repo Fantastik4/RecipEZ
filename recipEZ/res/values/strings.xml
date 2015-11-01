@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name"></string>
+    <string name="app_name">RecipEZ</string>
     <string name="logo_name">RecipEZ</string>
     <string name="btn_addToFridge">Add To Fridge</string>
     <string name="btn_getRecipes">Get Recipes</string>
