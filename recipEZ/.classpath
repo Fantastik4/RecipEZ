@@ -16,7 +16,7 @@
 	<classpathentry kind="lib" path="bin/dependencies/httpmime-4.5.1.jar"/>
 	<classpathentry kind="lib" path="bin/dependencies/jna-4.1.0.jar"/>
 	<classpathentry kind="lib" path="bin/dependencies/jna-platform-4.1.0.jar"/>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry excluding="RecipezAndroidTests/" kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

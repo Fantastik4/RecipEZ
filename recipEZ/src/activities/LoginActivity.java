@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.text.Spannable;
 import android.text.TextUtils;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.widget.EditText;
@@ -15,10 +16,9 @@ import resources.UserVerification;
 import android.text.SpannableString;
 import android.view.View.OnClickListener;
 import android.text.style.ForegroundColorSpan;
-import android.support.v7.app.ActionBarActivity;
 
 @SuppressWarnings("deprecation")
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends Activity {
 
 	boolean valid;
 	Button clickToLogin;
@@ -73,11 +73,6 @@ public class LoginActivity extends ActionBarActivity {
 		changeLogoNameColor.setSpan(new ForegroundColorSpan(Color.parseColor("#F5C04F")), 5, logoName.getText().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		logoName.setText(changeLogoNameColor);
 
-		/**
-		 * Hide Action Bar - Remove Shadow
-		 */
-		getSupportActionBar().hide();
-		getSupportActionBar().setElevation(0);
 
 		/**
 		 * Login Button
