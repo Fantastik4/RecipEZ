@@ -76,34 +76,29 @@ public class IngredientProvider {
 	 * Adds ingredientId and userId to User_Ingredients table of DB
 	 * @param userId
 	 * @param ingredientId
+	 * @throws InterruptedException 
 	 */
 	public void AddIngredientToUser(final String username, final String ingredientId) {
-
-		Thread thread = new Thread(new Runnable(){
-			@Override
-			public void run() {
-				try {
-					String urlString = "http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/AddIngredientToUser/" + username + "/" + ingredientId;
-					URL url = new URL(urlString);
-					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-
-					conn.setReadTimeout(10000 /* milliseconds */);
-					conn.setConnectTimeout(15000 /* milliseconds */);
-					conn.setRequestMethod("GET");
-					conn.setDoInput(true);
-					conn.connect();
-
-					InputStream stream = conn.getInputStream();
-					stream.close();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		thread.start();
+		try {
+			ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/AddIngredientToUser/" + username + "/" + ingredientId);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
+	private void GetIngredientsByRecipeID(final String recipeID) throws InterruptedException{
+		ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/FetchIngredientsByRecipeID/" + recipeID);
+	}
+
+	private void GetIngredientsFromService() throws InterruptedException{
+		ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/FetchAllIngredients/");
+	}
+
+	private void GetIngredientsByUserID(final String userID) throws InterruptedException {
+		ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/FetchIngredientsByUserID/" + userID);
+	}
+	
 	private void ParseIngredientsFromXML(XmlPullParser myParser)  {
 
 		int event;
@@ -146,85 +141,16 @@ public class IngredientProvider {
 			ingredientsAvailable.release();
 		}
 	}
-
-	private void GetIngredientsByRecipeID(final String recipeID) throws InterruptedException{
+	
+	private void ExecuteGet(final String requestUrl) throws InterruptedException
+	{
 		ingredientsAvailable.acquire();
 		Thread thread = new Thread(new Runnable(){
 			@Override
 			public void run() {
 				try {
 					XmlPullParserFactory xmlFactoryObject;
-					String urlString = "http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/FetchIngredientsByRecipeID/" + recipeID;
-					URL url = new URL(urlString);
-					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-
-					conn.setReadTimeout(10000 /* milliseconds */);
-					conn.setConnectTimeout(15000 /* milliseconds */);
-					conn.setRequestMethod("GET");
-					conn.setDoInput(true);
-					conn.connect();
-
-					InputStream stream = conn.getInputStream();
-
-					xmlFactoryObject = XmlPullParserFactory.newInstance();
-					XmlPullParser myParser = xmlFactoryObject.newPullParser();
-
-					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-					myParser.setInput(stream, null);
-					ParseIngredientsFromXML(myParser);
-					stream.close();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		thread.start();
-	}
-
-	private void GetIngredientsFromService() throws InterruptedException{
-		ingredientsAvailable.acquire();
-		Thread thread = new Thread(new Runnable(){
-			@Override
-			public void run() {
-				try {
-					XmlPullParserFactory xmlFactoryObject;
-					URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/FetchAllIngredients/");
-					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-
-					conn.setReadTimeout(10000 /* milliseconds */);
-					conn.setConnectTimeout(15000 /* milliseconds */);
-					conn.setRequestMethod("GET");
-					conn.setDoInput(true);
-					conn.connect();
-
-					InputStream stream = conn.getInputStream();
-
-					xmlFactoryObject = XmlPullParserFactory.newInstance();
-					XmlPullParser myParser = xmlFactoryObject.newPullParser();
-
-					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-					myParser.setInput(stream, null);
-					ParseIngredientsFromXML(myParser);
-					stream.close();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		thread.start();
-	}
-
-	private void GetIngredientsByUserID(final String userID) throws InterruptedException {
-		ingredientsAvailable.acquire();
-		Thread thread = new Thread(new Runnable(){
-			@Override
-			public void run() {
-				try {
-					XmlPullParserFactory xmlFactoryObject;
-					String urlString = "http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/FetchIngredientsByUserID/" + userID;
-					URL url = new URL(urlString);
+					URL url = new URL(requestUrl);
 					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
 					conn.setReadTimeout(10000 /* milliseconds */);

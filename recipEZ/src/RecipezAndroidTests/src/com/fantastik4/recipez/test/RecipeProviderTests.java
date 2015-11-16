@@ -27,5 +27,10 @@ public class RecipeProviderTests extends ActivityUnitTestCase{
 		ArrayList<Recipe> recipes = recipeProvider.FetchFavoriteRecipes("brianchan");
 		assertFalse("No recipes returned",recipes.isEmpty());
 	}
+	
+	public void testAddRecipeToFavorite()
+	{
+		recipeProvider.AddRecipeToFavorites("brianchan", "R1000");
+	}
 
 }

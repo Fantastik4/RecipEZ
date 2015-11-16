@@ -64,109 +64,20 @@ public class UserVerification {
 	 * Registers User
 	 */
 	public void RegisterUser(final String username, final String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-		final String passHash = PasswordHash.createHash(password);
-
-		Thread thread = new Thread(new Runnable(){
-			@Override
-			public void run() {
-				try {
-					XmlPullParserFactory xmlFactoryObject;
-					URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/VerificationServices/RegisterUser/"+username+"/"+passHash);
-					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-
-					conn.setReadTimeout(10000 /* milliseconds */);
-					conn.setConnectTimeout(15000 /* milliseconds */);
-					conn.setRequestMethod("GET");
-					conn.setDoInput(true);
-					conn.connect();
-
-					InputStream stream = conn.getInputStream();
-
-					xmlFactoryObject = XmlPullParserFactory.newInstance();
-					XmlPullParser myParser = xmlFactoryObject.newPullParser();
-
-					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-					myParser.setInput(stream, null);
-					//
-					stream.close();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		thread.start();
+		try {
+			ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/VerificationServices/RegisterUser/"+username+"/"+password);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
-	//	private void ValidateUser (final String name, final String pass) throws InterruptedException, NoSuchAlgorithmException, InvalidKeySpecException {
-	//		verificationAvailable.acquire();
-	//		Thread thread = new Thread(new Runnable(){
-	//			@Override
-	//			public void run() {
-	//				try {
-	//					XmlPullParserFactory xmlFactoryObject;
-	//					URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/VerificationServices/VerifyUser/"+name+"/"+pass);
-	//					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-	//
-	//					conn.setReadTimeout(10000 /* milliseconds */);
-	//					conn.setConnectTimeout(15000 /* milliseconds */);
-	//					conn.setRequestMethod("GET");
-	//					conn.setDoInput(true);
-	//					conn.connect();
-	//
-	//					InputStream stream = conn.getInputStream();
-	//
-	//					xmlFactoryObject = XmlPullParserFactory.newInstance();
-	//					XmlPullParser myParser = xmlFactoryObject.newPullParser();
-	//
-	//					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-	//					myParser.setInput(stream, null);
-	//					ParseVerification(myParser);
-	//					stream.close();
-	//				}
-	//				catch (Exception e) {
-	//					e.printStackTrace();
-	//				}
-	//			}
-	//		});
-	//		thread.start();
-	//	}
+	
 
 	/*
 	 * Gets HashedPassword from Webservice
 	 */
 	private void GetHashword(final String name) throws InterruptedException, NoSuchAlgorithmException, InvalidKeySpecException {
-		verificationAvailable.acquire();
-		Thread thread = new Thread(new Runnable(){
-			@Override
-			public void run() {
-				try {
-					XmlPullParserFactory xmlFactoryObject;
-					URL url = new URL("http://recipezrestservice-recipez.rhcloud.com/rest/VerificationServices/GetHashword/"+name);
-					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-
-					conn.setReadTimeout(10000 /* milliseconds */);
-					conn.setConnectTimeout(15000 /* milliseconds */);
-					conn.setRequestMethod("GET");
-					conn.setDoInput(true);
-					conn.connect();
-
-					InputStream stream = conn.getInputStream();
-
-					xmlFactoryObject = XmlPullParserFactory.newInstance();
-					XmlPullParser myParser = xmlFactoryObject.newPullParser();
-
-					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
-					myParser.setInput(stream, null);
-					ParseHashword(myParser);
-					stream.close();
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		thread.start();
+		ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/VerificationServices/GetHashword/"+name);
 	}
 
 	/*
@@ -200,36 +111,40 @@ public class UserVerification {
 			verificationAvailable.release();
 		}
 	}
+	
+	private void ExecuteGet(final String requestUrl) throws InterruptedException
+	{
+		verificationAvailable.acquire();
+		Thread thread = new Thread(new Runnable(){
+			@Override
+			public void run() {
+				try {
+					XmlPullParserFactory xmlFactoryObject;
+					URL url = new URL(requestUrl);
+					HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
-	//	private void ParseVerification(XmlPullParser myParser) 
-	//	{
-	//		int event;
-	//		String value = "", text = "";
-	//		try {
-	//			event = myParser.getEventType();
-	//			while (event != XmlPullParser.END_DOCUMENT) {
-	//				String name=myParser.getName();
-	//				switch (event){
-	//				case XmlPullParser.START_TAG:
-	//					if(name.equals("verificationResponse")){
-	//						if(myParser.next() == XmlPullParser.TEXT) 
-	//						{ 
-	//							text = myParser.getText();
-	//						}
-	//						value = text;
-	//					}
-	//					break;
-	//				case XmlPullParser.END_TAG:
-	//					if(value.equals("true")){
-	//						isValid = true;
-	//					}
-	//				}
-	//				event = myParser.next();
-	//			}
-	//		} catch (Exception e) {
-	//			e.printStackTrace();
-	//		}finally{
-	//			verificationAvailable.release();
-	//		}
-	//	}
+					conn.setReadTimeout(10000 /* milliseconds */);
+					conn.setConnectTimeout(15000 /* milliseconds */);
+					conn.setRequestMethod("GET");
+					conn.setDoInput(true);
+					conn.connect();
+
+					InputStream stream = conn.getInputStream();
+
+					xmlFactoryObject = XmlPullParserFactory.newInstance();
+					XmlPullParser myParser = xmlFactoryObject.newPullParser();
+
+					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
+					myParser.setInput(stream, null);
+					ParseHashword(myParser);
+					stream.close();
+				}
+				catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		thread.start();
+	}
+
 }

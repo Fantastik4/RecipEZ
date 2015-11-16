@@ -18,7 +18,6 @@ public class IngredientListTests extends ActivityUnitTestCase{
 	
 	public IngredientListTests() {
 		super(IngredientSearchActivity.class);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public void setUp() throws Exception
