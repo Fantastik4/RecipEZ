@@ -23,6 +23,29 @@ public class LoginActivityTest extends ActivityUnitTestCase{
 
 	}
 	
+	public void testRegisterButton()
+	{
+		TextView register = (TextView) getActivity().findViewById(com.fantastik4.recipez.R.id.tv_signUp);
+		register.performClick();
+		
+		final Intent launchIntent = getStartedActivityIntent();
+	    assertNotNull("Intent was not started", launchIntent);
+	    assertTrue("SignUpActivity not Started",launchIntent.toString().contains("SignUpActivity"));
+	}
+	
+	public void testNoCredentialsEntered()
+	{
+		TextView username = (TextView) getActivity().findViewById(com.fantastik4.recipez.R.id.et_enterUsername);
+		TextView password = (TextView) getActivity().findViewById(com.fantastik4.recipez.R.id.et_enterPassword);
+		username.setText("");
+		password.setText("");
+		Button signin = (Button) getActivity().findViewById(com.fantastik4.recipez.R.id.btn_clickToLogin);
+		signin.performClick();
+		
+		TextView errorMessage = (TextView) getActivity().findViewById(com.fantastik4.recipez.R.id.tv_errorMessage);
+		assertEquals("Error message should be displayed", errorMessage.getVisibility(), errorMessage.VISIBLE);
+	}
+	
 	public void testCorrectCredentialsLogin()
 	{
 		TextView username = (TextView) getActivity().findViewById(com.fantastik4.recipez.R.id.et_enterUsername);

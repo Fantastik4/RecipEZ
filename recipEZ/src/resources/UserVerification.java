@@ -17,7 +17,7 @@ public class UserVerification {
 	public UserVerification(){
 	}
 
-	public boolean validate(String u) {
+	public boolean validateUsernameExists(String u) {
 		try {
 			GetHashword(u);
 			verificationAvailable.acquire();
@@ -35,7 +35,7 @@ public class UserVerification {
 		} finally {
 			verificationAvailable.release();
 		}
-		return false;
+		return true;
 	}
 
 	public boolean validate(String u, String p){

@@ -140,7 +140,7 @@ public class SignUpActivity extends Activity {
 	 * @return
 	 */
 	private boolean ValidateUserCredentials(String username) {
-		valid = userVerify.validate(username);
+		valid = userVerify.validateUsernameExists(username);
 		return valid;
 	}
 }

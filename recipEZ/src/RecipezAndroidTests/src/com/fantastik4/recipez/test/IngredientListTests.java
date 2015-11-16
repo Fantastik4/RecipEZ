@@ -1,6 +1,7 @@
 package com.fantastik4.recipez.test;
 
 import static org.junit.Assert.fail;
+import static org.mockito.Mockito.*;
 
 
 import android.R;
@@ -20,7 +21,6 @@ public class IngredientListTests extends ActivityUnitTestCase{
 		super(IngredientSearchActivity.class);
 		// TODO Auto-generated constructor stub
 	}
-	IngredientSearchActivity isa;
 	
 	public void setUp() throws Exception
 	{
@@ -29,11 +29,12 @@ public class IngredientListTests extends ActivityUnitTestCase{
 		Intent mLaunchIntent = new Intent(getInstrumentation()
                 .getTargetContext(), IngredientSearchActivity.class);
         startActivity(mLaunchIntent, null, null);
-
+        
 	}
 
 	public void testNotNull(){
 		SearchView sv = (SearchView) getActivity().findViewById(com.fantastik4.recipez.R.id.sv_searchIngredients);
+		
 		assertNotNull("Search list is empty",sv.getChildAt(0));
 	}
 }
