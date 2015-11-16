@@ -1,7 +1,6 @@
 package com.fantastik4.recipez.test;
 
 import static org.junit.Assert.fail;
-import static org.mockito.Mockito.*;
 
 
 import android.R;
