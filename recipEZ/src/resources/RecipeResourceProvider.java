@@ -1,6 +1,8 @@
 package resources;
 
 import java.net.URL;
+
+import objects.Comment;
 import objects.Recipe;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -9,11 +11,13 @@ import org.xmlpull.v1.XmlPullParser;
 import java.util.concurrent.Semaphore;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-public class RecipeProvider{
-	private ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-	private final Semaphore recipesAvailable = new Semaphore(1, true);
+public class RecipeResourceProvider{
+	private ArrayList<Recipe> recipes;
+	private final Semaphore recipesAvailable;
 
-	public RecipeProvider() {
+	public RecipeResourceProvider() {
+		recipes = new ArrayList<Recipe>();
+		recipesAvailable = new Semaphore(1, true);
 	}
 
 	public ArrayList<Recipe> FetchAllRecipes() {

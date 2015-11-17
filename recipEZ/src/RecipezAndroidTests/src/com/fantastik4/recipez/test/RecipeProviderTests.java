@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import android.test.ActivityUnitTestCase;
 import objects.Recipe;
-import resources.RecipeProvider;
+import resources.RecipeResourceProvider;
 
 public class RecipeProviderTests extends ActivityUnitTestCase{
 
-	private RecipeProvider recipeProvider;
+	private RecipeResourceProvider recipeProvider;
 	
 	public RecipeProviderTests() {
 		super(activities.RecipeResultsActivity.class);
@@ -18,8 +18,7 @@ public class RecipeProviderTests extends ActivityUnitTestCase{
 	public void setUp() throws Exception
 	{
 		super.setUp();
-		recipeProvider = new RecipeProvider();
-
+		recipeProvider = new RecipeResourceProvider();
 	}
 	
 	public void testFetchFavoriteRecipes()

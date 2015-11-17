@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.content.Intent;
 import android.widget.ListView;
 import com.fantastik4.recipez.R;
-import resources.RecipeProvider;
+import resources.RecipeResourceProvider;
 import android.widget.SearchView;
 import resources.IngredientProvider;
 import objects.CheckedListViewAdapter;
@@ -104,7 +104,7 @@ public class IngredientSearchActivity extends Activity {
 	}
 
 	private ArrayList<Recipe> GetRecipeResults() {
-		RecipeProvider recipeProvider = new RecipeProvider();
+		RecipeResourceProvider recipeProvider = new RecipeResourceProvider();
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 		ArrayList<Recipe> recipeResults = null;
 		for(int i = 0; i < ingredientNames.size(); i++)
