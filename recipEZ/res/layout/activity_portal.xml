@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_portal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal|center"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.fantastik4.recipez.Activitys.PortalActivity" >
+
+    <!-- Search Recipes Button -->
+
+    <ImageButton
+        android:id="@+id/btn_searchRecipesOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:contentDescription="@string/contentDescription_searchRecipes"
+        android:src="@drawable/searchrecipes" />
+
+    <!-- Search Ingredients Button -->
+
+    <ImageButton
+        android:id="@+id/btn_searchIngredientsOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:background="@null"
+        android:contentDescription="@string/contentDescription_searchIngredients"
+        android:src="@drawable/searchingredients" />
+
+    <!-- Edit Ingredients List Button -->
+
+    <ImageButton
+        android:id="@+id/btn_editListOption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:background="@null"
+        android:contentDescription="@string/contentDescription_editList"
+        android:src="@drawable/list" />
+
+</LinearLayout>
