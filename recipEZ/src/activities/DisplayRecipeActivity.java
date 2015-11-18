@@ -1,23 +1,70 @@
 package activities;
 
 import objects.Recipe;
+import resources.RecipeResourceProvider;
+import resources.SocialResourceProvider;
 import android.os.Bundle;
 import android.app.Activity;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.RatingBar;
+import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+
 import com.fantastik4.recipez.R;
 
 public class DisplayRecipeActivity extends Activity {
 
 	private Recipe selectedRecipe;
 
+	private RatingBar ratingBar;
+	private ToggleButton favToggleButton;
+	private String username;
+	RecipeResourceProvider recipeResourceProvider;
+	SocialResourceProvider socialResourceProvider;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		username = (String) getIntent().getSerializableExtra("username");
 		selectedRecipe = (Recipe) getIntent().getSerializableExtra("SelectedRecipe");
+		
 		setContentView(R.layout.activity_display_recipe);
 
+		socialResourceProvider = new SocialResourceProvider();
+		recipeResourceProvider = new RecipeResourceProvider();
+
+		ratingBar = (RatingBar) findViewById(R.id.ratingBar1);
+		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(){
+
+			@Override
+			public void onRatingChanged(RatingBar rb, float rating, boolean fromUser) {
+				// TODO Auto-generated method stub
+				if(fromUser)
+				{
+					// TODO add if(recipeHasBeenRatedByUserAlready)
+					socialResourceProvider.AddRatingByRecipeID(selectedRecipe.getRecipeID(),(int) rating, username);
+				}
+				
+			}
+			
+		});
+		
+		favToggleButton = (ToggleButton) findViewById(R.id.favToggleButton);
+		favToggleButton.setOnCheckedChangeListener(new OnCheckedChangeListener(){
+
+			@Override
+			public void onCheckedChanged(CompoundButton button, boolean isChecked) {
+				if(isChecked) recipeResourceProvider.AddRecipeToFavorites(username, selectedRecipe.getRecipeID());
+				// TODO add Remove Recipe from favorites
+			}
+			
+		});
+		
+		
 		displayRecipe();
+		
 	}
 
 	public void displayRecipe() {
@@ -56,6 +103,11 @@ public class DisplayRecipeActivity extends Activity {
 			else steps = steps + "- " + tokensForSteps[i] + "\n\n";
 		}
 		tv4.setText(steps);
+		
+		float rating = (float) socialResourceProvider.FetchAverageRatingByRecipeID(selectedRecipe.getRecipeID());
+		 
+		ratingBar.setRating(rating);
+		
 
 	}
 }

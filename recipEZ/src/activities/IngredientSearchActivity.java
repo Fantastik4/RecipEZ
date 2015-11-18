@@ -75,6 +75,7 @@ public class IngredientSearchActivity extends Activity {
 				ArrayList<Recipe> recipeResults = GetRecipeResults();
 				Intent i = new Intent(IngredientSearchActivity.this, RecipeResultsActivity.class);
 				i.putExtra("RecipeResults", recipeResults);
+				i.putExtra("username", currentUsername);
 				startActivity(i);
 
 				overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);

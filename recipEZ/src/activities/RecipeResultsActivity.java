@@ -14,7 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class RecipeResultsActivity extends Activity {
 	private ArrayList<Recipe> recipeResults;
-
+	private String username;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -23,6 +23,7 @@ public class RecipeResultsActivity extends Activity {
 		setContentView(R.layout.activity_search_recipes);
 
 		recipeResults = (ArrayList<Recipe>) getIntent().getSerializableExtra("RecipeResults");
+		username = (String) getIntent().getSerializableExtra("username");
 		PopulateRecipeList();
 	}
 
@@ -47,6 +48,7 @@ public class RecipeResultsActivity extends Activity {
 				Recipe selectedRecipe = recipeResults.get(position);
 				Intent i = new Intent(RecipeResultsActivity.this, DisplayRecipeActivity.class);
 				i.putExtra("SelectedRecipe", selectedRecipe);
+				i.putExtra("username", username);
 				startActivity(i);
 
 				overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
