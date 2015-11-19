@@ -71,6 +71,16 @@ public class RecipeResourceProvider{
 			e.printStackTrace();
 		}
 	}
+	
+	public void RemoveRecipeFromFavorites(String username, String recipeId)
+	{
+		try {
+			ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/RemoveRecipeFromFavorites/" + username +"/" + recipeId);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	private void GetRecipesByIngredientID(final String ingredientID) throws InterruptedException {
 		ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/FetchRecipesByIngredientID/" + ingredientID);

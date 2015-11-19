@@ -50,11 +50,11 @@ public class DisplayRecipeActivity extends Activity {
 		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(){
 
 			@Override
-			public void onRatingChanged(RatingBar rb, float rating, boolean fromUser) {
+			public void onRatingChanged(RatingBar rb, float rating, boolean fromUser) 
+			{
 				// TODO Auto-generated method stub
 				if(fromUser)
 				{
-					// TODO add if(recipeHasBeenRatedByUserAlready)
 					socialResourceProvider.AddRatingByRecipeID(selectedRecipe.getRecipeID(),(int) rating, username);
 				}
 				
@@ -66,8 +66,10 @@ public class DisplayRecipeActivity extends Activity {
 		favToggleButton.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
 			@Override
-			public void onCheckedChanged(CompoundButton button, boolean isChecked) {
+			public void onCheckedChanged(CompoundButton button, boolean isChecked) 
+			{
 				if(isChecked) recipeResourceProvider.AddRecipeToFavorites(username, selectedRecipe.getRecipeID());
+				else recipeResourceProvider.RemoveRecipeFromFavorites(username, selectedRecipe.getRecipeID());
 				// TODO add Remove Recipe from favorites
 			}
 			
