@@ -142,7 +142,7 @@ public class DisplayRecipeActivity extends Activity {
 			tableRow = new TableRow(this);
 			
 			TextView tableRowUsername = new TextView(this);
-			tableRowUsername.setText(comments.get(i).GetUsername() + ":\t\t");
+			tableRowUsername.setText(comments.get(i).GetUsername() + "\t\t");
 			tableRow.addView(tableRowUsername);
 			
 			TextView tableRowCommentBody = new TextView(this);
