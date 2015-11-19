@@ -3,20 +3,20 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/commons-cli-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/fluent-hc-4.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/httpclient-4.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/httpclient-cache-4.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/httpclient-win-4.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/httpcore-4.4.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/httpcore-ab-4.4.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/httpcore-nio-4.4.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/httpmime-4.5.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/jna-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Brian/workspace/RecipEZ/recipEZ/libs/dependencies/jna-platform-4.1.0.jar"/>
 	<classpathentry excluding="RecipezAndroidTests/" kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="lib" path="libs/dependencies/commons-cli-1.2.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/fluent-hc-4.5.1.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/httpclient-4.5.1.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/httpclient-cache-4.5.1.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/httpclient-win-4.5.1.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/httpcore-4.4.3.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/httpcore-ab-4.4.3.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/httpcore-nio-4.4.3.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/httpmime-4.5.1.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/jna-4.1.0.jar"/>
+	<classpathentry kind="lib" path="libs/dependencies/jna-platform-4.1.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

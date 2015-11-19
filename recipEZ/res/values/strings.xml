@@ -24,6 +24,7 @@
     <string name="contentDescription_searchRecipes">Search Recipes</string>
     <string name="contentDescription_searchIngredients">Search Ingredients</string>
     <string name="contentDescription_editList">Edit List</string>
+    <string name="contentDescription_favorites">Access Favorites</string>
     <string name="sv_query">Search for ingredients</string>
 
     <color name="skyBlue">#0EC0D6</color>
@@ -40,5 +41,6 @@
     <string name="title_activity_edit_list">EditListActivity</string>
     <string name="title_activity_display_recipe">DisplayRecipe</string>
     <string name="title_activity_user_recipes">UserRecipesActivity</string>
+    <string name="title_activity_favorites">FavoritesActivity</string>
 
 </resources>

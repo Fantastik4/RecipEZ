@@ -10,13 +10,17 @@ import android.view.View.OnClickListener;
 
 public class PortalActivity extends Activity {
 
-	ImageButton searchRecipes, searchIngredients, editList;
 	private String username;
+	private ImageButton searchRecipes, searchIngredients, editList, favorites;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_portal);
+		
 		username = (String) getIntent().getSerializableExtra("CurrentUsername");
+		
+		favorites = (ImageButton)findViewById(R.id.btn_favorites);
 		editList = (ImageButton)findViewById(R.id.btn_editListOption);
 		searchRecipes = (ImageButton)findViewById(R.id.btn_searchRecipesOption);
 		searchIngredients = (ImageButton)findViewById(R.id.btn_searchIngredientsOption);
@@ -46,6 +50,7 @@ public class PortalActivity extends Activity {
 			public void onClick(View v) {
 				Intent i = new Intent(PortalActivity.this, IngredientSearchActivity.class);
 				i.putExtra("CurrentUsername", username);
+				
 				startActivity(i);
 				overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 			}
@@ -59,8 +64,23 @@ public class PortalActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				Intent i = new Intent(PortalActivity.this, EditListActivity.class);
-				i.putExtra("Currentusername", username);
-				System.out.println(username);
+				i.putExtra("CurrentUsername", username);
+				
+				startActivity(i);
+				overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+			}
+		});
+		
+		/**
+		 * Option 4: User chooses to access their list of favorite recipes
+		 */
+		favorites.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent(PortalActivity.this, FavoritesActivity.class);
+				i.putExtra("CurrentUsername", username);
+				
 				startActivity(i);
 				overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 			}

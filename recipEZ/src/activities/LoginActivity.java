@@ -17,7 +17,6 @@ import android.text.SpannableString;
 import android.view.View.OnClickListener;
 import android.text.style.ForegroundColorSpan;
 
-@SuppressWarnings("deprecation")
 public class LoginActivity extends Activity {
 
 	boolean valid;
@@ -118,6 +117,9 @@ public class LoginActivity extends Activity {
 
 			@Override
 			public void onClick(View v) {
+				((EditText) findViewById(R.id.et_enterUsername)).setText("");
+				((EditText) findViewById(R.id.et_enterPassword)).setText("");
+				
 				Intent j = new Intent(LoginActivity.this, SignUpActivity.class);
 
 				startActivity(j);

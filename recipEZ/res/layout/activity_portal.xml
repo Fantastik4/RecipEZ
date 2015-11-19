@@ -43,4 +43,15 @@
         android:contentDescription="@string/contentDescription_editList"
         android:src="@drawable/list" />
 
+    <!-- Access favorites Button -->
+
+    <ImageButton
+        android:id="@+id/btn_favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:background="@null"
+        android:contentDescription="@string/contentDescription_favorites"
+        android:src="@drawable/favorites" />
+
 </LinearLayout>

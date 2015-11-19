@@ -29,7 +29,7 @@ public class EditListActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_list);
 		
-		userID = (String) getIntent().getSerializableExtra("Currentusername");
+		userID = (String) getIntent().getSerializableExtra("CurrentUsername");
 		ingredientProvider = new IngredientProvider();
 		PopulateIngredientList();
 	}

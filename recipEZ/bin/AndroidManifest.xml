@@ -52,6 +52,10 @@
             android:name="activities.UserRecipesActivity"
             android:label="@string/title_activity_user_recipes" >
         </activity>
+        <activity
+            android:name="activities.FavoritesActivity"
+            android:label="@string/title_activity_favorites" >
+        </activity>
     </application>
 
 </manifest>

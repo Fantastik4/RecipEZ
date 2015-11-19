@@ -3,12 +3,17 @@ package activities;
 import android.os.Bundle;
 import android.view.View;
 import android.app.Activity;
+import android.content.Intent;
 import android.widget.Button;
 import android.graphics.Color;
 import android.text.Spannable;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 import com.fantastik4.recipez.R;
 import android.graphics.Typeface;
 import resources.UserVerification;
@@ -70,15 +75,19 @@ public class SignUpActivity extends Activity {
 		logoName.setText(changeLogoNameColor);
 
 		/**
-		 * Login Button
+		 * Register Button
 		 */
 		clickToRegister.setOnClickListener(new OnClickListener() {
 
 			public void onClick(View v) {
+				userVerify = new UserVerification();
+
 				usernameCheck = (EditText) findViewById(R.id.et_registerUsername);
 				String username = usernameCheck.getText().toString().trim();
+
 				passwordCheck = (EditText) findViewById(R.id.et_registerPassword);
 				String password = passwordCheck.getText().toString().trim();
+
 				confirmPasswordCheck = (EditText) findViewById(R.id.et_confirmPassword);
 				String confirmPassword = confirmPasswordCheck.getText().toString().trim();
 
@@ -90,57 +99,39 @@ public class SignUpActivity extends Activity {
 					displayErrorMessage.setText(getResources().getString(R.string.errorMessage_EmptyFields));
 				}
 				else {
-
-					//Check if username has already been taken
-					if(ValidateUserCredentials(username) == true) {
-
-						//Invalid credentials
+					if (userVerify.validateUsernameExists(username) == true) {
+						//Username exists
 						displayErrorMessage.setVisibility(View.VISIBLE);
 						displayErrorMessage.setText(getResources().getString(R.string.errorMessage_UsernameTaken));
-
-					} else {
-
-						//Passwords do not match
+					}
+					else {
 						if (password.equals(confirmPassword) == false) {
-							//Invalid credentials
+							//Passwords do not match
 							displayErrorMessage.setVisibility(View.VISIBLE);
 							displayErrorMessage.setText(getResources().getString(R.string.errorMessage_PasswordsMustMatch));
 						}
 						else {
-							if (username.length() >= 6 && username.length() <= 20) {
-								if (password.length() >= 6 && password.length() <= 20) {
+							//Requirements have been met - Create User
+							try {
+								userVerify.RegisterUser(username, confirmPassword);
 
-									//Requirements have been met - Create User
-									//displayErrorMessage.setVisibility(View.INVISIBLE);
-									//Intent i = new Intent(SignUpActivity.this, PortalActivity.class);
-									//i.putExtra("CurrentUsername", username);
+								displayErrorMessage.setVisibility(View.INVISIBLE);
+								Intent i = new Intent(SignUpActivity.this, PortalActivity.class);
+								i.putExtra("CurrentUsername", username);
 
-									//startActivity(i);
-									//overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
-
-									System.out.println("User created!");
-								}
-							}
-							else {
-								//Invalid credentials
-								displayErrorMessage.setVisibility(View.VISIBLE);
-								displayErrorMessage.setText(getResources().getString(R.string.errorMessage_SignUpRequirements));
+								startActivity(i);
+								overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+							} catch (NoSuchAlgorithmException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							} catch (InvalidKeySpecException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
 							}
 						}
 					}
 				}
 			}
 		});
-	}
-
-	/**
-	 * Username and Password
-	 * @param username
-	 * @param password
-	 * @return
-	 */
-	private boolean ValidateUserCredentials(String username) {
-		valid = userVerify.validateUsernameExists(username);
-		return valid;
 	}
 }
