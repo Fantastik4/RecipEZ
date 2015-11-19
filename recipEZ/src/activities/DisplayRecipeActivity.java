@@ -1,6 +1,8 @@
 package activities;
 
+import objects.Comment;
 import objects.Recipe;
+import resources.CommentProvider;
 import resources.RecipeResourceProvider;
 import resources.SocialResourceProvider;
 import android.os.Bundle;
@@ -9,8 +11,14 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.ToggleButton;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import com.fantastik4.recipez.R;
 
@@ -23,6 +31,8 @@ public class DisplayRecipeActivity extends Activity {
 	private String username;
 	RecipeResourceProvider recipeResourceProvider;
 	SocialResourceProvider socialResourceProvider;
+	CommentProvider commentProvider;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,7 +44,8 @@ public class DisplayRecipeActivity extends Activity {
 
 		socialResourceProvider = new SocialResourceProvider();
 		recipeResourceProvider = new RecipeResourceProvider();
-
+		commentProvider = new CommentProvider();
+		
 		ratingBar = (RatingBar) findViewById(R.id.ratingBar1);
 		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(){
 
@@ -109,5 +120,28 @@ public class DisplayRecipeActivity extends Activity {
 		ratingBar.setRating(rating);
 		
 
+		TableLayout tl = (TableLayout)findViewById(R.id.tableLayout);
+		ArrayList<Comment> comments = commentProvider.FetchCommentsByRecipe(selectedRecipe.getRecipeID());
+		for (int i = 0; i < comments.size(); i++) {
+			TableRow tableRow = new TableRow(this);
+			
+			TextView tableRowUsername = new TextView(this);
+			tableRowUsername.setText(comments.get(i).GetUsername() + ":\t\t");
+			tableRow.addView(tableRowUsername);
+			
+			TextView tableRowCommentBody = new TextView(this);
+			tableRowCommentBody.setText(comments.get(i).GetCommentBody() + "\t\t");
+			tableRow.addView(tableRowCommentBody);
+			
+			TextView tableRowCommentDate = new TextView(this);
+			Date d = comments.get(i).GetDate();
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(d);
+			String date = cal.get(Calendar.YEAR) + " - " + (cal.get(Calendar.MONTH)+1) + " - " + cal.get(Calendar.DAY_OF_MONTH);
+			tableRowCommentDate.setText(date);
+			tableRow.addView(tableRowCommentDate);
+			
+			tl.addView(tableRow,i);
+		}
 	}
 }

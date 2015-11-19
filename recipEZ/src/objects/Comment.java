@@ -1,9 +1,11 @@
 package objects;
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 
 public class Comment implements Serializable{
@@ -36,20 +38,34 @@ public class Comment implements Serializable{
 	{
 		return username;
 	}
+	public void SetUsername(String u) {
+		this.username = u;
+	}
 	
 	public String GetRecipeID()
 	{
 		return recipeId;
+	}
+	public void SetRecipeID(String r) {
+		this.recipeId = r;
 	}
 	
 	public String GetCommentBody()
 	{
 		return commentBody;
 	}
+	public void SetCommentBody(String c) {
+		this.commentBody = c;
+	}
 	
 	public Date GetDate()
 	{
 		return date;
+	}
+	public void SetDate(String d) throws ParseException{	
+		DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+		Date x = format.parse(d);
+		this.date = x;
 	}
 
 }
