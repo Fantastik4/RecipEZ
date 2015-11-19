@@ -122,8 +122,24 @@ public class DisplayRecipeActivity extends Activity {
 
 		TableLayout tl = (TableLayout)findViewById(R.id.tableLayout);
 		ArrayList<Comment> comments = commentProvider.FetchCommentsByRecipe(selectedRecipe.getRecipeID());
+		
+		TableRow tableRow = new TableRow(this);
+		
+		TextView tableRowUsernameTitle = new TextView(this);
+		tableRowUsernameTitle.setText("Username");
+		tableRow.addView(tableRowUsernameTitle);
+		
+		TextView tableRowCommentBodyTitle = new TextView(this);
+		tableRowCommentBodyTitle.setText("Comment");
+		tableRow.addView(tableRowCommentBodyTitle);
+		
+		TextView tableRowCommentDateTitle = new TextView(this);
+		tableRowCommentDateTitle.setText("Date");
+		tableRow.addView(tableRowCommentDateTitle);
+		
+		tl.addView(tableRow);
 		for (int i = 0; i < comments.size(); i++) {
-			TableRow tableRow = new TableRow(this);
+			tableRow = new TableRow(this);
 			
 			TextView tableRowUsername = new TextView(this);
 			tableRowUsername.setText(comments.get(i).GetUsername() + ":\t\t");
@@ -141,7 +157,7 @@ public class DisplayRecipeActivity extends Activity {
 			tableRowCommentDate.setText(date);
 			tableRow.addView(tableRowCommentDate);
 			
-			tl.addView(tableRow,i);
+			tl.addView(tableRow,i+1);
 		}
 	}
 }
