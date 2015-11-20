@@ -60,6 +60,8 @@ public class DisplayRecipeActivity extends Activity {
 		});
 
 		favToggleButton = (ToggleButton) findViewById(R.id.favToggleButton);
+		boolean pressed = socialResourceProvider.IsRecipeAlreadyFavorited(username, selectedRecipe.getRecipeID());
+		if(pressed)favToggleButton.toggle();
 		favToggleButton.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
 			@Override

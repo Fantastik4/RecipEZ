@@ -63,8 +63,9 @@ public class UserVerification {
 	/*
 	 * Registers User
 	 */
-	public void RegisterUser(final String username, final String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+	public void RegisterUser(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
 		try {
+			password = PasswordHash.createHash(password);
 			ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/VerificationServices/RegisterUser/"+username+"/"+password);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

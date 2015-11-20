@@ -17,17 +17,19 @@ public class SocialResourceProvider {
 	
 	public enum ParseKey
 	{
-		Comment, Rating, NoParse, AverageRating
+		Comment, Rating, NoParse, AverageRating, IsFavorited
 	}
 
 	private static final String getAverageRatingsByRecipeID_URL = "http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/GetAverageRating/";
 	private static final String getCommentByRecipeID_URL = "http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/GetComments/";
 	private static final String getRatingsByRecipeID_URL = "http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/GetRatings/";
 	private static final String addRatingsByRecipeID_URL = "http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/AddRatingToRecipe/{$recipeId}/{$rating}/{$username}";
-	private static final String addCommentsByRecipeId = "http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/AddCommentToRecipe/{$recipe_id}/{$username}/{$comment_body}/";;
+	private static final String addCommentsByRecipeId = "http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/AddCommentToRecipe/{$recipe_id}/{$username}/{$comment_body}/";
+	private static final String RecipeAlreadyInFavorites = "http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/RecipeAlreadyInFavorites/{$username}/{$recipe_id}";
 	private ArrayList<Comment> comments;
 	private ArrayList<Integer> ratings;
 	private double averageRating;
+	private boolean isFavorited;
 	
 	Semaphore resourcesAvailable;
 	public SocialResourceProvider()
@@ -51,6 +53,21 @@ public class SocialResourceProvider {
 		}
 	}
 	
+	public boolean IsRecipeAlreadyFavorited(String username, String recipeID)
+	{
+		try {
+			RecipeIsFavorited(username, recipeID);
+			resourcesAvailable.acquire();
+			return isFavorited;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}finally{
+			resourcesAvailable.release();
+		}
+	}
+
 	public ArrayList<Comment> FetchCommentsByRecipeID(String recipeID) {
 		try {
 			GetCommentsByRecipeID(recipeID);
@@ -94,8 +111,6 @@ public class SocialResourceProvider {
 		}
 	}
 	
-
-	
 	private void GetAverageRatingsByRecipeID(String recipeID)
 	{
 		String url = getAverageRatingsByRecipeID_URL + recipeID;
@@ -105,6 +120,14 @@ public class SocialResourceProvider {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void RecipeIsFavorited(String username, String recipeID) throws InterruptedException {
+		String url = RecipeAlreadyInFavorites;
+		url = url.replace("{$username}", username);
+		url = url.replace("{$recipe_id}", recipeID);
+		
+		ExecuteGet(url, ParseKey.IsFavorited);
 	}
 	
 	private void GetRatingsByRecipeID(String recipeId) throws InterruptedException
@@ -168,6 +191,11 @@ public class SocialResourceProvider {
 						ParseAverageRatingFromXML(myParser);
 						break;
 					}
+					case IsFavorited:
+					{
+						ParseIsFavorited(myParser);
+						break;
+					}
 					case NoParse:
 					{
 						break;
@@ -183,6 +211,35 @@ public class SocialResourceProvider {
 		thread.start();
 	}
 	
+	private void ParseIsFavorited(XmlPullParser myParser) {
+		int event;
+		try {
+			int isFavorited = 0;
+			event = myParser.getEventType();
+			while (event != XmlPullParser.END_DOCUMENT) {
+				String name = myParser.getName();
+				switch (event){
+				case XmlPullParser.START_TAG:
+
+					if(name.equals("is_favorited"))
+					{
+						if(myParser.next() == XmlPullParser.TEXT) isFavorited = Integer.parseInt(myParser.getText());
+					}
+
+					break;
+				case XmlPullParser.END_TAG:
+					if(isFavorited == 1) this.isFavorited = true;
+					else this.isFavorited = false;
+				}
+				event = myParser.next();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			resourcesAvailable.release();
+		}
+	}
+
 	private void ParseAverageRatingFromXML(XmlPullParser myParser) {
 		int event;
 		try {
