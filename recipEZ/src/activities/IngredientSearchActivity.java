@@ -48,13 +48,9 @@ public class IngredientSearchActivity extends Activity {
 		searchField.setOnQueryTextListener(new OnQueryTextListener(){
 			
 			@Override
-			public boolean onQueryTextChange(String searchArg) {
-
-				if (searchArg.length() == 0)
-					listView.setVisibility(View.INVISIBLE);
-				else
-					listView.setVisibility(View.VISIBLE);
-
+			public boolean onQueryTextChange(String searchArg) 
+			{
+				listView.setVisibility(View.VISIBLE);
 				UpdateDisplayedIngredients(searchArg);
 				ingredientListAdapter.notifyDataSetChanged();
 				return false;
@@ -143,11 +139,27 @@ public class IngredientSearchActivity extends Activity {
 	@SuppressLint("DefaultLocale")
 	private void UpdateDisplayedIngredients(String searchArg) {
 		displayedIngredients.clear();
+		if(searchArg.length() <= 0) return;
+
 		for(Model m: ingredientNames) {
-			if(m.getName().toLowerCase().contains(searchArg.toLowerCase())){
-				displayedIngredients.add(m);
+			if(m.isSelected()) displayedIngredients.add(m);
+		}
+		for(Model m: ingredientNames)
+		{
+			if(m.getName().toLowerCase().contains(searchArg.toLowerCase()))
+			{
+				if(!ModelListContainsString(displayedIngredients, m.getName())) displayedIngredients.add(m);
 			}
 		}
+	}
+	
+	private boolean ModelListContainsString(ArrayList<Model> list, String name)
+	{
+		for(Model m: list)
+		{
+			if(m.getName().equals(name)) return true;
+		}
+		return false;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -173,7 +185,6 @@ public class IngredientSearchActivity extends Activity {
 			temp.setSelected(false);
 			ingredientNames.add(temp);
 		}
-
 		return ingredientNames;
 	}
 }
