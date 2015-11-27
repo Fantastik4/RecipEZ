@@ -8,6 +8,7 @@ import objects.Ingredient;
 import java.util.ArrayList;
 import android.app.Activity;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.content.Intent;
 import android.widget.ListView;
 import com.fantastik4.recipez.R;
@@ -24,6 +25,7 @@ public class IngredientSearchActivity extends Activity {
 	ListView listView;
 	SearchView searchField;
 	String currentUsername;
+	ImageButton reset;
 	Button findRecipes, addToFridge;
 	ArrayList<Ingredient> ingredients;
 	IngredientProvider ingredientProvider;
@@ -85,8 +87,25 @@ public class IngredientSearchActivity extends Activity {
 				AddIngredientsToFridge();
 			}
 		});
-
+		
+		reset = (ImageButton) findViewById(R.id.ingredientListResetButton);
+		reset.setOnClickListener(new OnClickListener(){
+			public void onClick(View view)
+			{
+				ResetIngredientList();
+				UpdateDisplayedIngredients("");
+				ingredientListAdapter.notifyDataSetChanged();
+			}
+		});
 		PopulateIngredientList();
+	}
+	
+	public void ResetIngredientList()
+	{
+		for(Model m: ingredientNames)
+		{
+			m.setSelected(false);
+		}
 	}
 
 	private void AddIngredientsToFridge()
@@ -137,13 +156,16 @@ public class IngredientSearchActivity extends Activity {
 	}
 
 	@SuppressLint("DefaultLocale")
-	private void UpdateDisplayedIngredients(String searchArg) {
+	private void UpdateDisplayedIngredients(String searchArg) 
+	{
 		displayedIngredients.clear();
 		if(searchArg.length() <= 0) return;
 
-		for(Model m: ingredientNames) {
+		for(Model m: ingredientNames) 
+		{
 			if(m.isSelected()) displayedIngredients.add(m);
 		}
+		
 		for(Model m: ingredientNames)
 		{
 			if(m.getName().toLowerCase().contains(searchArg.toLowerCase()))

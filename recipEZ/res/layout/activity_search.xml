@@ -42,6 +42,12 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center|bottom" >
 
+        <ImageButton
+            android:id="@+id/ingredientListResetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/reset" />
+
         <Button
             android:id="@+id/AddToFridgeButton"
             android:layout_width="wrap_content"
@@ -55,6 +61,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:text="@string/btn_getRecipes" />
+
     </TableRow>
 
 </LinearLayout>
