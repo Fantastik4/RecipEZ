@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.content.Intent;
+import android.media.Image;
 import android.widget.ListView;
 import com.fantastik4.recipez.R;
 import resources.RecipeResourceProvider;
@@ -25,7 +27,7 @@ public class IngredientSearchActivity extends Activity {
 	ListView listView;
 	SearchView searchField;
 	String currentUsername;
-	ImageButton reset;
+	ImageView reset;
 	Button findRecipes, addToFridge;
 	ArrayList<Ingredient> ingredients;
 	IngredientProvider ingredientProvider;
@@ -52,7 +54,6 @@ public class IngredientSearchActivity extends Activity {
 			@Override
 			public boolean onQueryTextChange(String searchArg) 
 			{
-				listView.setVisibility(View.VISIBLE);
 				UpdateDisplayedIngredients(searchArg);
 				ingredientListAdapter.notifyDataSetChanged();
 				return false;
@@ -65,10 +66,13 @@ public class IngredientSearchActivity extends Activity {
 			}
 		});
 
+		
 		//Initializing Buttons
 		findRecipes = (Button) findViewById(R.id.GetRecipeButton);
 		findRecipes.setOnClickListener(new OnClickListener(){
-
+		
+		
+		
 			public void onClick(View arg0) {
 				ArrayList<Recipe> recipeResults = GetRecipeResults();
 				Intent i = new Intent(IngredientSearchActivity.this, RecipeResultsActivity.class);
@@ -88,7 +92,7 @@ public class IngredientSearchActivity extends Activity {
 			}
 		});
 		
-		reset = (ImageButton) findViewById(R.id.ingredientListResetButton);
+		reset = (ImageView) findViewById(R.id.ingredientListResetButton);
 		reset.setOnClickListener(new OnClickListener(){
 			public void onClick(View view)
 			{
@@ -159,19 +163,23 @@ public class IngredientSearchActivity extends Activity {
 	private void UpdateDisplayedIngredients(String searchArg) 
 	{
 		displayedIngredients.clear();
+		AddSelectedIngredientsToDisplayList();
 		if(searchArg.length() <= 0) return;
 
-		for(Model m: ingredientNames) 
-		{
-			if(m.isSelected()) displayedIngredients.add(m);
-		}
-		
 		for(Model m: ingredientNames)
 		{
 			if(m.getName().toLowerCase().contains(searchArg.toLowerCase()))
 			{
 				if(!ModelListContainsString(displayedIngredients, m.getName())) displayedIngredients.add(m);
 			}
+		}
+	}
+	
+	private void AddSelectedIngredientsToDisplayList()
+	{
+		for(Model m: ingredientNames) 
+		{
+			if(m.isSelected()) displayedIngredients.add(m);
 		}
 	}
 	
@@ -190,13 +198,16 @@ public class IngredientSearchActivity extends Activity {
 
 		ingredients = ingredientProvider.FetchAllIngredients();
 		ingredientNames = ConvertIngredientsToModelArray(ingredients);
-		displayedIngredients = (ArrayList<Model>) ingredientNames.clone();
+		displayedIngredients = new ArrayList<Model>();
+		AddSelectedIngredientsToDisplayList();
+		
 		ingredientListAdapter = new CheckedListViewAdapter(this, displayedIngredients);
 
 		listView.setAdapter(ingredientListAdapter);
 
 		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-		listView.setVisibility(View.INVISIBLE);
+		listView.setVisibility(View.VISIBLE);
+
 	}
 
 	private ArrayList<Model> ConvertIngredientsToModelArray(ArrayList<Ingredient> ingredients) {
