@@ -86,6 +86,16 @@ public class IngredientProvider {
 			e.printStackTrace();
 		}
 	}
+	
+	public void RemoveIngredientFromUser(String username, String ingredientId)
+	{
+		try {
+			ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/RemoveIngredientFromUser/" + username + "/" + ingredientId);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	private void GetIngredientsByRecipeID(final String recipeID) throws InterruptedException{
 		ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/FetchIngredientsByRecipeID/" + recipeID);

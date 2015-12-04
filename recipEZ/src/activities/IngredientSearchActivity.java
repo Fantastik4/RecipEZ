@@ -68,7 +68,7 @@ public class IngredientSearchActivity extends Activity {
 
 		
 		//Initializing Buttons
-		findRecipes = (Button) findViewById(R.id.GetRecipeButton);
+		findRecipes = (Button) findViewById(R.id.edit_list_get_recipes);
 		findRecipes.setOnClickListener(new OnClickListener(){
 		
 		
@@ -193,7 +193,8 @@ public class IngredientSearchActivity extends Activity {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void PopulateIngredientList() {
+	private void PopulateIngredientList() 
+	{
 		listView = (ListView)findViewById(R.id.lv_ingredientsList);		
 
 		ingredients = ingredientProvider.FetchAllIngredients();

@@ -56,7 +56,7 @@
             android:text="@string/btn_addToFridge" />
 
         <Button
-            android:id="@+id/GetRecipeButton"
+            android:id="@+id/edit_list_get_recipes"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="2"
