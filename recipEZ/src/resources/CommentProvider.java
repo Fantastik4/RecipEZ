@@ -10,10 +10,26 @@ import java.util.concurrent.Semaphore;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 public class CommentProvider {
-	private ArrayList<Comment> comments = new ArrayList<Comment>();
-	private final Semaphore commentsAvailable = new Semaphore(1, true);
+	private ArrayList<Comment> comments;
+	private final Semaphore commentsAvailable;
 
 	public CommentProvider() {
+		comments = new ArrayList<Comment>();
+		commentsAvailable = new Semaphore(1, true);
+	}
+	
+	public void AddCommentByRecipeID(String recipeID, String username, String comment_body)
+	{
+		String url = WebserviceHelper.addCommentsByRecipeId;
+		url = url.replace("{$username}", username);
+		url = url.replace("{$recipe_id}", recipeID);
+		url = url.replace("{$comment_body}", comment_body);
+		try {
+			ExecuteGet(url, true);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -35,23 +51,8 @@ public class CommentProvider {
 		}
 	}
 
-	/**
-	 * Adds ingredientId and userId to User_Ingredients table of DB
-	 * @param userId
-	 * @param ingredientId
-	 * @throws InterruptedException 
-	 */
-	public void AddIngredientToUser(final String username, final String ingredientId) {
-		try {
-			ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/IngredientServices/AddIngredientToUser/" + username + "/" + ingredientId);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	private void GetCommentsByRecipeID(final String recipeID) throws InterruptedException{
-		ExecuteGet("http://recipezrestservice-recipez.rhcloud.com/rest/RecipeServices/GetComments/" + recipeID);
+		ExecuteGet(WebserviceHelper.getCommentByRecipeID_URL + recipeID, false);
 	}
 	
 	private void ParseCommentsFromXML(XmlPullParser myParser)  {
@@ -101,7 +102,7 @@ public class CommentProvider {
 		}
 	}
 	
-	private void ExecuteGet(final String requestUrl) throws InterruptedException
+	private void ExecuteGet(final String requestUrl, final boolean release) throws InterruptedException
 	{
 		commentsAvailable.acquire();
 		Thread thread = new Thread(new Runnable(){
@@ -125,11 +126,14 @@ public class CommentProvider {
 
 					myParser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
 					myParser.setInput(stream, null);
-					ParseCommentsFromXML(myParser);
+					if(!release)ParseCommentsFromXML(myParser);
 					stream.close();
 				}
 				catch (Exception e) {
 					e.printStackTrace();
+				}finally
+				{
+					if(release) commentsAvailable.release();
 				}
 			}
 		});

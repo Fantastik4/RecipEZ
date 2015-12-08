@@ -3,12 +3,17 @@ package activities;
 import objects.Comment;
 import objects.Recipe;
 import resources.CommentProvider;
+import resources.RatingsProvider;
 import resources.RecipeResourceProvider;
-import resources.SocialResourceProvider;
+import resources.UserFavoritesProvider;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.app.Activity;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TableLayout;
@@ -28,9 +33,13 @@ public class DisplayRecipeActivity extends Activity {
 	private RatingBar ratingBar;
 	private Recipe selectedRecipe;
 	CommentProvider commentProvider;
+	RatingsProvider ratingsProvider;
+	UserFavoritesProvider favoritesProvider;
+	Button commentButton;
+	EditText commentTextField;
 	private ToggleButton favToggleButton;
 	RecipeResourceProvider recipeResourceProvider;
-	SocialResourceProvider socialResourceProvider;
+	TableLayout commentsTable;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +50,10 @@ public class DisplayRecipeActivity extends Activity {
 
 		setContentView(R.layout.activity_display_recipe);
 
-		socialResourceProvider = new SocialResourceProvider();
 		recipeResourceProvider = new RecipeResourceProvider();
 		commentProvider = new CommentProvider();
+		ratingsProvider = new RatingsProvider();
+		favoritesProvider = new UserFavoritesProvider();
 
 		ratingBar = (RatingBar) findViewById(R.id.ratingBar1);
 		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener(){
@@ -54,13 +64,23 @@ public class DisplayRecipeActivity extends Activity {
 				if(fromUser)
 				{
 					// TODO add if(recipeHasBeenRatedByUserAlready)
-					socialResourceProvider.AddRatingByRecipeID(selectedRecipe.getRecipeID(),(int) rating, username);
+					ratingsProvider.AddRatingByRecipeID(selectedRecipe.getRecipeID(),(int) rating, username);
 				}
 			}
 		});
+		
+		commentButton = (Button) findViewById(R.id.addComment);
+		commentButton.setOnClickListener(new OnClickListener() {
 
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				addComment();
+			}
+		});
+		
 		favToggleButton = (ToggleButton) findViewById(R.id.favToggleButton);
-		boolean pressed = socialResourceProvider.IsRecipeAlreadyFavorited(username, selectedRecipe.getRecipeID());
+		boolean pressed = favoritesProvider.IsRecipeAlreadyFavorited(username, selectedRecipe.getRecipeID());
 		if(pressed)favToggleButton.toggle();
 		favToggleButton.setOnCheckedChangeListener(new OnCheckedChangeListener(){
 
@@ -112,15 +132,26 @@ public class DisplayRecipeActivity extends Activity {
 		}
 		tv4.setText(steps);
 
-		float rating = (float) socialResourceProvider.FetchAverageRatingByRecipeID(selectedRecipe.getRecipeID());
+		float rating = (float) ratingsProvider.FetchAverageRatingByRecipeID(selectedRecipe.getRecipeID());
 
 		ratingBar.setRating(rating);
 
-		TableLayout tl = (TableLayout)findViewById(R.id.tableLayout);
+		//set comment adding fields
+		commentTextField = (EditText) findViewById(R.id.commentTextField);
+
+		DisplayComments();
+		
+	}
+	
+	private void DisplayComments()
+	{
+		//set comment display table
+		commentsTable = (TableLayout)findViewById(R.id.tableLayout);
+		
 		ArrayList<Comment> comments = commentProvider.FetchCommentsByRecipe(selectedRecipe.getRecipeID());
-
+		
 		TableRow tableRow = new TableRow(this);
-
+		
 		TextView tableRowUsernameTitle = new TextView(this);
 		tableRowUsernameTitle.setText("Username");
 		tableRow.addView(tableRowUsernameTitle);
@@ -132,19 +163,20 @@ public class DisplayRecipeActivity extends Activity {
 		TextView tableRowCommentDateTitle = new TextView(this);
 		tableRowCommentDateTitle.setText("Date");
 		tableRow.addView(tableRowCommentDateTitle);
-
-		tl.addView(tableRow);
-		for (int i = 0; i < comments.size(); i++) {
+		
+		commentsTable.addView(tableRow);
+		for (int i = 0; i < comments.size(); i++) 
+		{
 			tableRow = new TableRow(this);
-
+			
 			TextView tableRowUsername = new TextView(this);
 			tableRowUsername.setText(comments.get(i).GetUsername() + "\t\t");
 			tableRow.addView(tableRowUsername);
-
+			
 			TextView tableRowCommentBody = new TextView(this);
 			tableRowCommentBody.setText(comments.get(i).GetCommentBody() + "\t\t");
 			tableRow.addView(tableRowCommentBody);
-
+			
 			TextView tableRowCommentDate = new TextView(this);
 			Date d = comments.get(i).GetDate();
 			Calendar cal = Calendar.getInstance();
@@ -152,8 +184,16 @@ public class DisplayRecipeActivity extends Activity {
 			String date = cal.get(Calendar.YEAR) + " - " + (cal.get(Calendar.MONTH)+1) + " - " + cal.get(Calendar.DAY_OF_MONTH);
 			tableRowCommentDate.setText(date);
 			tableRow.addView(tableRowCommentDate);
-
-			tl.addView(tableRow,i+1);
+			
+			commentsTable.addView(tableRow,i+1);
 		}
+	}
+	
+	public void addComment() 
+	{
+		commentProvider.AddCommentByRecipeID(selectedRecipe.getRecipeID(), username, commentTextField.getText().toString());
+		commentTextField.setText("");
+		commentsTable.removeAllViews();
+		DisplayComments();
 	}
 }
