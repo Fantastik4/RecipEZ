@@ -1,108 +1,134 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-​
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
     <LinearLayout
         android:id="@+id/activity_displayRecipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        
         android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="activities.DisplayRecipeActivity" >
-​
-        <FrameLayout
-            android:id="@+id/title"
+
+        <TableRow
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="clip_vertical" >
-​
+            android:layout_height="wrap_content" >
+
             <TextView
                 android:id="@+id/tv_recipeName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:textAllCaps="true"
+                android:textColor="@color/gold"
                 android:textSize="20sp" />
-        </FrameLayout>
-​
-        <ToggleButton
-            android:id="@+id/favToggleButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="clip_vertical"
-            android:text="Favorite"
-            android:textOff="Favorite This Recipe"
-            android:textOn="Recipe Favorited!" />
-​
+
+            <ImageView
+                android:id="@+id/favoriteSelection"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:src="@drawable/favoritefalse" />
+        </TableRow>
+
         <RatingBar
             android:id="@+id/ratingBar1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-​
+            android:layout_height="wrap_content"
+            android:scaleX="0.5"
+            android:scaleY="0.5"
+            android:stepSize="1"
+            android:transformPivotX="0dp" />
+
         <TextView
             android:id="@+id/tv_recipeDescriptionLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_recipeDescription"
+            android:textAllCaps="true"
+            android:textColor="@color/skyBlue"
             android:textSize="15sp" />
-​
+
         <TextView
             android:id="@+id/tv_recipeDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp" />
 ​
+
         <TextView
             android:id="@+id/tv_ingredientsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_recipeIngredients"
+            android:textAllCaps="true"
+            android:textColor="@color/skyBlue"
             android:textSize="15sp" />
 ​
+
         <TextView
             android:id="@+id/tv_recipeIngredients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp" />
 ​
+
         <TextView
             android:id="@+id/tv_directionsLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_recipeDirections"
+            android:textAllCaps="true"
+            android:textColor="@color/skyBlue"
             android:textSize="15sp" />
 ​
+
         <TextView
             android:id="@+id/tv_recipeDirections"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp" />
-​
+
         <EditText
             android:id="@+id/commentTextField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10" >
+            android:background="@color/white"
+            android:drawablePadding="10dp"
+            android:drawableStart="@drawable/comment"
+            android:ems="10"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="@string/commentText"
+            android:textSize="12sp" >
         </EditText>
-​
+
         <Button
             android:id="@+id/addComment"
             style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Comment" />
-​
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/standardHeight"
+            android:layout_marginTop="20dp"
+            android:background="@color/darkBlue"
+            android:text="@string/buttonText_postComment"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:paddingTop="25dp"
+            android:textSize="12sp" >
         </TableLayout>
 ​
     </LinearLayout>
-​
+
 </ScrollView>

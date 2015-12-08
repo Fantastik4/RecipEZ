@@ -33,7 +33,9 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.03" >
+        android:layout_weight="0.03"
+        android:divider="@null"
+        android:dividerHeight="0dp" >
     </ListView>
 
     <TableRow
@@ -46,22 +48,22 @@
             android:id="@+id/ingredientListResetButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/reset" />
+            android:layout_margin="20dp"
+            android:src="@drawable/refresh" />
 
-        <Button
+        <ImageView
             android:id="@+id/AddToFridgeButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/btn_addToFridge" />
+            android:layout_margin="20dp"
+            android:src="@drawable/searchrecipes" />
 
-        <Button
+        <ImageView
             android:id="@+id/edit_list_get_recipes"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="@string/btn_getRecipes" />
-
+            android:layout_margin="20dp"
+            android:src="@drawable/getrecipes" />
     </TableRow>
 
 </LinearLayout>

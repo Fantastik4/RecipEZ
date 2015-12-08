@@ -52,6 +52,6 @@
         android:layout_marginStart="25dp"
         android:background="@null"
         android:contentDescription="@string/contentDescription_favorites"
-        android:src="@drawable/favorites" />
+        android:src="@drawable/favorite" />
 
 </LinearLayout>

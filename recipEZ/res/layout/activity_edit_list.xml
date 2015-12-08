@@ -18,8 +18,9 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.03" >
-
+        android:layout_weight="0.03"
+        android:divider="@null"
+        android:dividerHeight="0dp" >
     </ListView>
 
     <TableRow
@@ -28,19 +29,21 @@
         android:layout_gravity="center_horizontal"
         android:gravity="center|bottom" >
 
-        <Button
+        <ImageView
             android:id="@+id/edit_list_get_recipes"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="@string/btn_getRecipes" />
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:contentDescription="@string/contentDescription_getRecipes"
+            android:src="@drawable/getrecipes" />
 
         <ImageView
             android:id="@+id/edit_list_trash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_trash" />
-
+            android:layout_margin="20dp"
+            android:contentDescription="@string/contentDescription_delete"
+            android:src="@drawable/delete" />
     </TableRow>
 
 </LinearLayout>

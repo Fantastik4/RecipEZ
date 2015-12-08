@@ -1620,20 +1620,20 @@ containing a value of this type.
         public static final int abc_config_showMenuShortcutsWhenKeyboardPresent=0x7f050003;
     }
     public static final class color {
-        public static final int abc_background_cache_hint_selector_material_dark=0x7f06003e;
-        public static final int abc_background_cache_hint_selector_material_light=0x7f06003f;
-        public static final int abc_color_highlight_material=0x7f060040;
+        public static final int abc_background_cache_hint_selector_material_dark=0x7f06003f;
+        public static final int abc_background_cache_hint_selector_material_light=0x7f060040;
+        public static final int abc_color_highlight_material=0x7f060041;
         public static final int abc_input_method_navigation_guard=0x7f060003;
-        public static final int abc_primary_text_disable_only_material_dark=0x7f060041;
-        public static final int abc_primary_text_disable_only_material_light=0x7f060042;
-        public static final int abc_primary_text_material_dark=0x7f060043;
-        public static final int abc_primary_text_material_light=0x7f060044;
-        public static final int abc_search_url_text=0x7f060045;
+        public static final int abc_primary_text_disable_only_material_dark=0x7f060042;
+        public static final int abc_primary_text_disable_only_material_light=0x7f060043;
+        public static final int abc_primary_text_material_dark=0x7f060044;
+        public static final int abc_primary_text_material_light=0x7f060045;
+        public static final int abc_search_url_text=0x7f060046;
         public static final int abc_search_url_text_normal=0x7f060000;
         public static final int abc_search_url_text_pressed=0x7f060002;
         public static final int abc_search_url_text_selected=0x7f060001;
-        public static final int abc_secondary_text_material_dark=0x7f060046;
-        public static final int abc_secondary_text_material_light=0x7f060047;
+        public static final int abc_secondary_text_material_dark=0x7f060047;
+        public static final int abc_secondary_text_material_light=0x7f060048;
         public static final int accent_material_dark=0x7f060011;
         public static final int accent_material_light=0x7f060010;
         public static final int background_floating_material_dark=0x7f060008;
@@ -1659,6 +1659,7 @@ containing a value of this type.
         public static final int dim_foreground_material_light=0x7f06001f;
         public static final int foreground_material_dark=0x7f060004;
         public static final int foreground_material_light=0x7f060005;
+        public static final int gold=0x7f06003e;
         /**  TODO: This is 40% alpha on the default accent color. 
          */
         public static final int highlighted_text_material_dark=0x7f060024;
@@ -1713,8 +1714,8 @@ containing a value of this type.
         public static final int skyBlue=0x7f06003a;
         public static final int switch_thumb_disabled_material_dark=0x7f060016;
         public static final int switch_thumb_disabled_material_light=0x7f060017;
-        public static final int switch_thumb_material_dark=0x7f060048;
-        public static final int switch_thumb_material_light=0x7f060049;
+        public static final int switch_thumb_material_dark=0x7f060049;
+        public static final int switch_thumb_material_light=0x7f06004a;
         public static final int switch_thumb_normal_material_dark=0x7f060014;
         public static final int switch_thumb_normal_material_light=0x7f060015;
         public static final int white=0x7f06003c;
@@ -1986,22 +1987,28 @@ containing a value of this type.
         public static final int abc_textfield_search_activated_mtrl_alpha=0x7f02003b;
         public static final int abc_textfield_search_default_mtrl_alpha=0x7f02003c;
         public static final int abc_textfield_search_material=0x7f02003d;
-        public static final int confirmpassword=0x7f02003e;
-        public static final int email=0x7f02003f;
-        public static final int favorites=0x7f020040;
-        public static final int ic_launcher=0x7f020041;
-        public static final int ic_trash=0x7f020042;
-        public static final int list=0x7f020043;
-        public static final int logo=0x7f020044;
-        public static final int notification_template_icon_bg=0x7f02004d;
-        public static final int password=0x7f020045;
-        public static final int reset=0x7f020046;
-        public static final int reset_icon=0x7f020047;
-        public static final int searchingredients=0x7f020048;
-        public static final int searchrecipes=0x7f020049;
-        public static final int selector=0x7f02004a;
-        public static final int trash_icon=0x7f02004b;
-        public static final int username=0x7f02004c;
+        public static final int comment=0x7f02003e;
+        public static final int confirmpassword=0x7f02003f;
+        public static final int delete=0x7f020040;
+        public static final int email=0x7f020041;
+        public static final int favorite=0x7f020042;
+        public static final int favoritefalse=0x7f020043;
+        public static final int favoritetrue=0x7f020044;
+        public static final int getrecipes=0x7f020045;
+        public static final int ic_launcher=0x7f020046;
+        public static final int ic_trash=0x7f020047;
+        public static final int list=0x7f020048;
+        public static final int logo=0x7f020049;
+        public static final int notification_template_icon_bg=0x7f020053;
+        public static final int password=0x7f02004a;
+        public static final int refresh=0x7f02004b;
+        public static final int reset=0x7f02004c;
+        public static final int reset_icon=0x7f02004d;
+        public static final int searchingredients=0x7f02004e;
+        public static final int searchrecipes=0x7f02004f;
+        public static final int selector=0x7f020050;
+        public static final int trash_icon=0x7f020051;
+        public static final int username=0x7f020052;
     }
     public static final class id {
         public static final int AddToFridgeButton=0x7f090071;
@@ -2066,7 +2073,7 @@ containing a value of this type.
         public static final int et_registerUsername=0x7f090076;
         public static final int expand_activities_button=0x7f090025;
         public static final int expanded_menu=0x7f090035;
-        public static final int favToggleButton=0x7f09004f;
+        public static final int favoriteSelection=0x7f09004f;
         public static final int home=0x7f090000;
         public static final int homeAsUp=0x7f09000e;
         public static final int icon=0x7f090029;
@@ -2305,10 +2312,14 @@ containing a value of this type.
         public static final int btn_addToFridge=0x7f0a0014;
         public static final int btn_getRecipes=0x7f0a0015;
         public static final int buttonText_login=0x7f0a0016;
+        public static final int buttonText_postComment=0x7f0a0032;
         public static final int buttonText_register=0x7f0a0017;
         public static final int buttonText_signUp=0x7f0a0018;
+        public static final int commentText=0x7f0a0033;
+        public static final int contentDescription_delete=0x7f0a0034;
         public static final int contentDescription_editList=0x7f0a0028;
         public static final int contentDescription_favorites=0x7f0a0029;
+        public static final int contentDescription_getRecipes=0x7f0a0035;
         public static final int contentDescription_searchIngredients=0x7f0a0027;
         public static final int contentDescription_searchRecipes=0x7f0a0026;
         public static final int errorMessage_EmptyFields=0x7f0a001e;
@@ -2320,6 +2331,7 @@ containing a value of this type.
         public static final int hint_password=0x7f0a001b;
         public static final int hint_registerUsername=0x7f0a0019;
         public static final int hint_username=0x7f0a001a;
+        public static final int label_favorite=0x7f0a0031;
         public static final int label_recipeDescription=0x7f0a0022;
         public static final int label_recipeDirections=0x7f0a0024;
         public static final int label_recipeIngredients=0x7f0a0023;

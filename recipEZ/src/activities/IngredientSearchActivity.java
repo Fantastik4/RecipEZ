@@ -27,8 +27,7 @@ public class IngredientSearchActivity extends Activity {
 	ListView listView;
 	SearchView searchField;
 	String currentUsername;
-	ImageView reset;
-	Button findRecipes, addToFridge;
+	ImageView reset, findRecipes, addToFridge;
 	ArrayList<Ingredient> ingredients;
 	IngredientProvider ingredientProvider;
 	CheckedListViewAdapter ingredientListAdapter;
@@ -68,7 +67,7 @@ public class IngredientSearchActivity extends Activity {
 
 		
 		//Initializing Buttons
-		findRecipes = (Button) findViewById(R.id.edit_list_get_recipes);
+		findRecipes = (ImageView) findViewById(R.id.edit_list_get_recipes);
 		findRecipes.setOnClickListener(new OnClickListener(){
 		
 		
@@ -84,7 +83,7 @@ public class IngredientSearchActivity extends Activity {
 			}
 		});
 
-		addToFridge = (Button) findViewById(R.id.AddToFridgeButton);
+		addToFridge = (ImageView) findViewById(R.id.AddToFridgeButton);
 		addToFridge.setOnClickListener(new OnClickListener(){
 			public void onClick(View view)
 			{

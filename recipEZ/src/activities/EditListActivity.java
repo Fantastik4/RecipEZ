@@ -26,8 +26,7 @@ public class EditListActivity extends Activity {
 	String userID;
 	ListView listView;
 	SearchView searchField;
-	Button findRecipes;
-	ImageView trash;
+	ImageView trash, findRecipes;
 	ArrayList<Ingredient> ingredients;
 	IngredientProvider ingredientProvider;
 	CheckedListViewAdapter ingredientListAdapter;
@@ -43,10 +42,9 @@ public class EditListActivity extends Activity {
 		PopulateIngredientList();
 	}
 	
-	@SuppressWarnings("unchecked")
 	private void PopulateIngredientList() {
 		listView = (ListView)findViewById(R.id.lv_userList);
-		findRecipes = (Button) findViewById(R.id.edit_list_get_recipes);
+		findRecipes = (ImageView) findViewById(R.id.edit_list_get_recipes);
 		trash = (ImageView) findViewById(R.id.edit_list_trash);
 		
 		ingredients = ingredientProvider.FetchIngredientsByUserID(userID);

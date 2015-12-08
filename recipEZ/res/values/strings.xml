@@ -42,5 +42,11 @@
     <string name="title_activity_display_recipe">DisplayRecipe</string>
     <string name="title_activity_user_recipes">UserRecipesActivity</string>
     <string name="title_activity_favorites">FavoritesActivity</string>
+    <string name="label_favorite">Favorite</string>
+    <string name="buttonText_postComment">POST</string>
+    <string name="commentText">Add Comment...</string>
+    <color name="gold">#F5C04F</color>
+    <string name="contentDescription_delete">Delete</string>
+    <string name="contentDescription_getRecipes">Get Recipes</string>
 
 </resources>
