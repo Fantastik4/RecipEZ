@@ -95,7 +95,7 @@ public class DisplayRecipeActivity extends Activity {
 		favToggleButton = (ImageView) findViewById(R.id.favoriteSelection);
 		isFavorite = favoritesProvider.IsRecipeAlreadyFavorited(username, selectedRecipe.getRecipeID());
 
-		if (isFavorite == true)
+		if (isFavorite)
 			favToggleButton.setImageResource(R.drawable.favoritetrue);
 
 		favToggleButton.setOnClickListener(new OnClickListener() {
@@ -104,9 +104,11 @@ public class DisplayRecipeActivity extends Activity {
 				if (isFavorite == false) {
 					recipeResourceProvider.AddRecipeToFavorites(username, selectedRecipe.getRecipeID());
 					favToggleButton.setImageResource(R.drawable.favoritetrue);
+					isFavorite = true;
 				} else {
 					recipeResourceProvider.RemoveRecipeFromFavorites(username, selectedRecipe.getRecipeID());
 					favToggleButton.setImageResource(R.drawable.favoritefalse);
+					isFavorite = false;
 				}
 			}
 		});
@@ -221,6 +223,7 @@ public class DisplayRecipeActivity extends Activity {
 	public void addComment() {
 		commentProvider.AddCommentByRecipeID(selectedRecipe.getRecipeID(), username,
 				commentTextField.getText().toString());
+		String s = commentTextField.getText().toString();
 		commentTextField.setText("");
 		commentsTable.removeAllViews();
 		DisplayComments();

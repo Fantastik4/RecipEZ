@@ -21,6 +21,7 @@ public class CommentProvider {
 	public void AddCommentByRecipeID(String recipeID, String username, String comment_body)
 	{
 		String url = WebserviceHelper.addCommentsByRecipeId;
+		comment_body = comment_body.replaceAll(" ", "%20");
 		url = url.replace("{$username}", username);
 		url = url.replace("{$recipe_id}", recipeID);
 		url = url.replace("{$comment_body}", comment_body);
@@ -31,6 +32,7 @@ public class CommentProvider {
 			e.printStackTrace();
 		}
 	}
+
 
 	/**
 	 * Fetches all ingredients of userID
