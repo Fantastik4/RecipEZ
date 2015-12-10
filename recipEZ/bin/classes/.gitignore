@@ -1,5 +1,6 @@
 /android/
 /com/
+/.gitignore
 /activities/
 /objects/
 /resources/

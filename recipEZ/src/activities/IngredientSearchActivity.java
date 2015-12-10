@@ -45,7 +45,57 @@ public class IngredientSearchActivity extends Activity {
 		ingredientProvider = new IngredientProvider();
 		currentUsername = (String) getIntent().getSerializableExtra("CurrentUsername");
 
-		// Initializing SearchField On Query Text Listener
+		InitializeSearchField();
+
+		// Initializing Buttons
+		InitializeFindRecipeButton();
+
+		InitializeAddToFridgeButton();
+
+		InitializeResetButton();
+		
+		PopulateIngredientList();
+	}
+
+	private void InitializeResetButton() {
+		reset = (ImageView) findViewById(R.id.ingredientListResetButton);
+		reset.setOnClickListener(new OnClickListener() {
+			public void onClick(View view) {
+				ResetIngredientList();
+				UpdateDisplayedIngredients("");
+				ingredientListAdapter.notifyDataSetChanged();
+			}
+		});
+	}
+
+	private void InitializeAddToFridgeButton() {
+		addToFridge = (ImageView) findViewById(R.id.AddToFridgeButton);
+		addToFridge.setOnClickListener(new OnClickListener() {
+			public void onClick(View view) {
+				AddIngredientsToFridge();
+			}
+		});
+	}
+
+	private void InitializeFindRecipeButton() {
+		findRecipes = (ImageView) findViewById(R.id.edit_list_get_recipes);
+		findRecipes.setOnClickListener(new OnClickListener() {
+
+			public void onClick(View arg0) {
+				ArrayList<Recipe> recipeResults = GetRecipeResults();
+				if (recipeResults != null) {
+					Intent i = new Intent(IngredientSearchActivity.this, RecipeResultsActivity.class);
+					i.putExtra("RecipeResults", recipeResults);
+					i.putExtra("username", currentUsername);
+					startActivity(i);
+
+					overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
+				}
+			}
+		});		
+	}
+
+	private void InitializeSearchField() {
 		searchField = (SearchView) findViewById(R.id.sv_searchIngredients);
 		searchField.setSelected(true);
 		searchField.setOnQueryTextListener(new OnQueryTextListener() {
@@ -63,40 +113,6 @@ public class IngredientSearchActivity extends Activity {
 				return false;
 			}
 		});
-
-		// Initializing Buttons
-		findRecipes = (ImageView) findViewById(R.id.edit_list_get_recipes);
-		findRecipes.setOnClickListener(new OnClickListener() {
-
-			public void onClick(View arg0) {
-				ArrayList<Recipe> recipeResults = GetRecipeResults();
-				if (recipeResults != null) {
-					Intent i = new Intent(IngredientSearchActivity.this, RecipeResultsActivity.class);
-					i.putExtra("RecipeResults", recipeResults);
-					i.putExtra("username", currentUsername);
-					startActivity(i);
-
-					overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
-				}
-			}
-		});
-
-		addToFridge = (ImageView) findViewById(R.id.AddToFridgeButton);
-		addToFridge.setOnClickListener(new OnClickListener() {
-			public void onClick(View view) {
-				AddIngredientsToFridge();
-			}
-		});
-
-		reset = (ImageView) findViewById(R.id.ingredientListResetButton);
-		reset.setOnClickListener(new OnClickListener() {
-			public void onClick(View view) {
-				ResetIngredientList();
-				UpdateDisplayedIngredients("");
-				ingredientListAdapter.notifyDataSetChanged();
-			}
-		});
-		PopulateIngredientList();
 	}
 
 	public void ResetIngredientList() {

@@ -50,7 +50,7 @@ public class DisplayRecipeActivity extends Activity {
 	RecipeResourceProvider recipeResourceProvider;
 	TableLayout commentsTable;
 	TextView recipeDescription, recipeIngredients, recipeDirections, commentHint;
-
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_recipe);
@@ -81,22 +81,41 @@ public class DisplayRecipeActivity extends Activity {
 		ratingsProvider = new RatingsProvider();
 		favoritesProvider = new UserFavoritesProvider();
 
-		commentButton = (Button) findViewById(R.id.addComment);
-		commentButton.setTypeface(walkwayUltraBold);
-		commentButton.setOnClickListener(new OnClickListener() {
+		InitializeCommentButton();
+		InitializeFavoriteButton();
+		InitializeRatingBar();
+
+		displayRecipe();
+	}
+	
+	public void displayRecipe() {
+		DisplayRecipeName();
+		DisplayRecipeDescription();
+		float rating = (float) ratingsProvider.FetchAverageRatingByRecipeID(selectedRecipe.getRecipeID());
+		ratingBar.setRating(rating);
+		// set comment adding fields
+		commentTextField = (EditText) findViewById(R.id.commentTextField);
+		DisplayComments();
+	}
+
+	private void InitializeRatingBar() {
+		ratingBar = (RatingBar) findViewById(R.id.ratingBar1);
+		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
 
 			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				addComment();
+			public void onRatingChanged(RatingBar rb, float rating, boolean fromUser) {
+				if (fromUser) {
+					ratingsProvider.AddRatingByRecipeID(selectedRecipe.getRecipeID(), (int) rating, username);
+				}
 			}
 		});
+	}
 
+	private void InitializeFavoriteButton() {
 		favToggleButton = (ImageView) findViewById(R.id.favoriteSelection);
 		isFavorite = favoritesProvider.IsRecipeAlreadyFavorited(username, selectedRecipe.getRecipeID());
 
-		if (isFavorite)
-			favToggleButton.setImageResource(R.drawable.favoritetrue);
+		if (isFavorite) favToggleButton.setImageResource(R.drawable.favoritetrue);
 
 		favToggleButton.setOnClickListener(new OnClickListener() {
 
@@ -112,52 +131,40 @@ public class DisplayRecipeActivity extends Activity {
 				}
 			}
 		});
-
-		ratingBar = (RatingBar) findViewById(R.id.ratingBar1);
-		ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
-
-			@Override
-			public void onRatingChanged(RatingBar rb, float rating, boolean fromUser) {
-				if (fromUser) {
-					ratingsProvider.AddRatingByRecipeID(selectedRecipe.getRecipeID(), (int) rating, username);
-				}
-			}
-		});
-
-		displayRecipe();
 	}
 
-	public void displayRecipe() {
+	private void InitializeCommentButton() {
+		commentButton = (Button) findViewById(R.id.addComment);
+		commentButton.setTypeface(walkwayUltraBold);
+		commentButton.setOnClickListener(new OnClickListener() {
 
-		String[] tokensForList, tokensForSteps;
-		String list = "", steps = "", delim = "\",\"";
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				addComment();
+			}
+		});
+	}
 
-		// Display Recipe Name
-		TextView tv1 = (TextView) findViewById(R.id.tv_recipeName);
-		tv1.setTypeface(walkwaySemiBold);
-		tv1.setText(selectedRecipe.getName());
-
-		// Display Recipe Description
+	private void DisplayRecipeDescription() 
+	{
 		TextView tv2 = (TextView) findViewById(R.id.tv_recipeDescription);
 		tv2.setTypeface(walkwayUltraBold);
 		tv2.setText(selectedRecipe.getRecipeDescription() + "\n");
+		DisplayIngredients();
+		DisplayRecipeDirections();
+	}
 
-		// Display Ingredients
-		TextView tv3 = (TextView) findViewById(R.id.tv_recipeIngredients);
-		tv3.setTypeface(walkwayUltraBold);
+	private void DisplayRecipeName() 
+	{
+		TextView tv1 = (TextView) findViewById(R.id.tv_recipeName);
+		tv1.setTypeface(walkwaySemiBold);
+		tv1.setText(selectedRecipe.getName());
+	}
 
-		String ingredients = selectedRecipe.getRecipeIngredients();
-		tokensForList = ingredients.substring(2, ingredients.length() - 2).split(delim);
-
-		for (int i = 0; i < tokensForList.length; i++) {
-			if (i == 0)
-				list = "• " + tokensForList[i] + "\n";
-			else
-				list = list + "• " + tokensForList[i] + "\n";
-		}
-		tv3.setText(list);
-
-		// Display Recipe Directions
+	private void DisplayRecipeDirections() {
+		String[] tokensForSteps;
+		String steps = "", delim = "\",\"";
 		TextView tv4 = (TextView) findViewById(R.id.tv_recipeDirections);
 		tv4.setTypeface(walkwayUltraBold);
 
@@ -171,15 +178,25 @@ public class DisplayRecipeActivity extends Activity {
 				steps = steps + tokensForSteps[i] + "\n\n";
 		}
 		tv4.setText(steps);
+	}
 
-		float rating = (float) ratingsProvider.FetchAverageRatingByRecipeID(selectedRecipe.getRecipeID());
+	private void DisplayIngredients() 
+	{
+		String list = "", delim = "\",\"";
+		String[] tokensForList;
+		TextView tv3 = (TextView) findViewById(R.id.tv_recipeIngredients);
+		tv3.setTypeface(walkwayUltraBold);
 
-		ratingBar.setRating(rating);
+		String ingredients = selectedRecipe.getRecipeIngredients();
+		tokensForList = ingredients.substring(2, ingredients.length() - 2).split(delim);
 
-		// set comment adding fields
-		commentTextField = (EditText) findViewById(R.id.commentTextField);
-
-		DisplayComments();
+		for (int i = 0; i < tokensForList.length; i++) {
+			if (i == 0)
+				list = "• " + tokensForList[i] + "\n";
+			else
+				list = list + "• " + tokensForList[i] + "\n";
+		}
+		tv3.setText(list);
 	}
 
 	@SuppressWarnings("deprecation")

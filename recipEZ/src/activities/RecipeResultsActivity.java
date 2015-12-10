@@ -15,7 +15,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class RecipeResultsActivity extends Activity {
 	private String username;
 	private ArrayList<Recipe> recipeResults;
-
+	ListView listView;
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +29,10 @@ public class RecipeResultsActivity extends Activity {
 
 	@SuppressWarnings("unchecked")
 	private void PopulateRecipeList() {
-		ListView listView = (ListView)findViewById(R.id.lv_recipeList);		
+		listView = (ListView)findViewById(R.id.lv_recipeList);		
 
 		ArrayList<String> recipeNames = GetNamesOfRecipes();
-		ArrayList<String> displayedRecipes = (ArrayList<String>) recipeNames.clone();
-		SimpleListAdapter recipeListAdapter = new SimpleListAdapter(this, android.R.layout.simple_list_item_1, displayedRecipes);
+		SimpleListAdapter recipeListAdapter = new SimpleListAdapter(this, android.R.layout.simple_list_item_1, recipeNames);
 
 		listView.setAdapter(recipeListAdapter);
 		listView.setClickable(true);
@@ -54,6 +53,7 @@ public class RecipeResultsActivity extends Activity {
 		});
 	}
 
+	
 	private ArrayList<String> GetNamesOfRecipes() {
 		ArrayList<String> recipeNames = new ArrayList<String>();
 		
