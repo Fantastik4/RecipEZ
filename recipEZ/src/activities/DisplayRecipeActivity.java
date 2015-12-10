@@ -192,9 +192,9 @@ public class DisplayRecipeActivity extends Activity {
 
 		for (int i = 0; i < tokensForList.length; i++) {
 			if (i == 0)
-				list = "• " + tokensForList[i] + "\n";
+				list = "- " + tokensForList[i] + "\n";
 			else
-				list = list + "• " + tokensForList[i] + "\n";
+				list = list + "- " + tokensForList[i] + "\n";
 		}
 		tv3.setText(list);
 	}

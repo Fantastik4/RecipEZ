@@ -1,6 +1,5 @@
 /android/
 /com/
-/.gitignore
+/ClassDiagrams.ucls
+/.DS_Store
 /activities/
-/objects/
-/resources/
