@@ -13,7 +13,8 @@ public class CommentProvider {
 	private ArrayList<Comment> comments;
 	private final Semaphore commentsAvailable;
 
-	public CommentProvider() {
+	public CommentProvider() 
+	{	                           
 		comments = new ArrayList<Comment>();
 		commentsAvailable = new Semaphore(1, true);
 	}
@@ -22,6 +23,7 @@ public class CommentProvider {
 	{
 		String url = WebserviceHelper.addCommentsByRecipeId;
 		comment_body = comment_body.replaceAll(" ", "%20");
+		comment_body = comment_body.replaceAll("\n", "_nl_");
 		url = url.replace("{$username}", username);
 		url = url.replace("{$recipe_id}", recipeID);
 		url = url.replace("{$comment_body}", comment_body);
@@ -43,6 +45,7 @@ public class CommentProvider {
 		try {
 			GetCommentsByRecipeID(recipeID);
 			commentsAvailable.acquire();
+			AddReturnsToComments();
 			return comments;
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
@@ -50,6 +53,13 @@ public class CommentProvider {
 			return null;
 		}finally{
 			commentsAvailable.release();
+		}
+	}
+
+	private void AddReturnsToComments() {
+		for(Comment c: comments)
+		{
+			c.SetCommentBody(c.GetCommentBody().replaceAll("_nl_", "\n"));
 		}
 	}
 

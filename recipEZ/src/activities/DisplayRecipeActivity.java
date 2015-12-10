@@ -223,7 +223,6 @@ public class DisplayRecipeActivity extends Activity {
 	public void addComment() {
 		commentProvider.AddCommentByRecipeID(selectedRecipe.getRecipeID(), username,
 				commentTextField.getText().toString());
-		String s = commentTextField.getText().toString();
 		commentTextField.setText("");
 		commentsTable.removeAllViews();
 		DisplayComments();
