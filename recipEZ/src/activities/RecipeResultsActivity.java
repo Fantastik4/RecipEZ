@@ -29,6 +29,11 @@ public class RecipeResultsActivity extends Activity {
 
 	@SuppressWarnings("unchecked")
 	private void PopulateRecipeList() {
+		InitializeListView();
+	}
+
+	
+	private void InitializeListView() {
 		listView = (ListView)findViewById(R.id.lv_recipeList);		
 
 		ArrayList<String> recipeNames = GetNamesOfRecipes();
@@ -53,7 +58,6 @@ public class RecipeResultsActivity extends Activity {
 		});
 	}
 
-	
 	private ArrayList<String> GetNamesOfRecipes() {
 		ArrayList<String> recipeNames = new ArrayList<String>();
 		

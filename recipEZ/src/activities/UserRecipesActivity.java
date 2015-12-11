@@ -23,7 +23,8 @@ public class UserRecipesActivity extends Activity {
 	private ArrayList<Model> ingredientNames;
 	private IngredientProvider ingredientProvider;
 	private ArrayList<Ingredient> userIngredients;
-
+	private ListView listView;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_user_recipes);
@@ -36,8 +37,13 @@ public class UserRecipesActivity extends Activity {
 	}
 
 	@SuppressWarnings("unchecked")
-	private void populateRecipeList() {
-		ListView listView = (ListView)findViewById(R.id.lv_userRecipeList);		
+	private void populateRecipeList() 
+	{
+		InitializeListView();
+	}
+
+	private void InitializeListView() {
+		listView = (ListView)findViewById(R.id.lv_userRecipeList);		
 
 		ArrayList<String> recipeNames = GetNamesOfRecipes();
 		ArrayList<String> displayedRecipes = (ArrayList<String>) recipeNames.clone();
@@ -61,7 +67,8 @@ public class UserRecipesActivity extends Activity {
 		});
 	}
 
-	private ArrayList<String> GetNamesOfRecipes() {
+	private ArrayList<String> GetNamesOfRecipes() 
+	{
 		ArrayList<String> recipeNames = new ArrayList<String>();
 
 		for(Recipe r: recipeResults) {

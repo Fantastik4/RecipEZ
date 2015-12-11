@@ -20,7 +20,8 @@ public class FavoritesActivity extends Activity {
 	private String currentUsername;
 	private ArrayList<Recipe> recipeResults;
 	private RecipeResourceProvider recipeProvider;
-
+	private ListView listView;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -35,7 +36,11 @@ public class FavoritesActivity extends Activity {
 
 	@SuppressWarnings("unchecked")
 	private void populateRecipeList() {
-		ListView listView = (ListView)findViewById(R.id.lv_favoriteRecipeList);		
+		InitializeListView();
+	}
+	
+	private void InitializeListView() {
+		listView = (ListView)findViewById(R.id.lv_favoriteRecipeList);		
 
 		ArrayList<String> recipeNames = GetNamesOfRecipes();
 		ArrayList<String> displayedRecipes = (ArrayList<String>) recipeNames.clone();
@@ -58,7 +63,7 @@ public class FavoritesActivity extends Activity {
 			}
 		});
 	}
-	
+
 	private ArrayList<String> GetNamesOfRecipes() {
 		ArrayList<String> recipeNames = new ArrayList<String>();
 

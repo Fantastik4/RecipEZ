@@ -52,19 +52,13 @@ public class EditListActivity extends Activity {
 		listView.setAdapter(ingredientListAdapter);
 		listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
-		trash.setOnClickListener(new OnClickListener() {
+		InitializeTrashButton();
 
-			@Override
-			public void onClick(View trashView) {
-				for (int i = 0; i < displayedIngredients.size(); i++) {
-					if (displayedIngredients.get(i).isSelected()) {
-						ingredientProvider.RemoveIngredientFromUser(userID, ingredients.get(i).getIngredientID());
-					}
-				}
-				PopulateIngredientList();
-			}
-		});
-
+		InitializeFindRecipeButton();
+	}
+	
+	private void InitializeFindRecipeButton()
+	{
 		findRecipes.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -79,6 +73,22 @@ public class EditListActivity extends Activity {
 
 					overridePendingTransition(R.anim.abc_fade_in, R.anim.abc_fade_out);
 				}
+			}
+		});
+	}
+	
+	private void InitializeTrashButton()
+	{
+		trash.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View trashView) {
+				for (int i = 0; i < displayedIngredients.size(); i++) {
+					if (displayedIngredients.get(i).isSelected()) {
+						ingredientProvider.RemoveIngredientFromUser(userID, ingredients.get(i).getIngredientID());
+					}
+				}
+				PopulateIngredientList();
 			}
 		});
 	}
