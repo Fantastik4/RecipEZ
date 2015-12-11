@@ -73,30 +73,25 @@ public class UserRecipesActivity extends Activity {
 	private ArrayList<Recipe> GetRecipeResults() {
 		RecipeResourceProvider recipeProvider = new RecipeResourceProvider();
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
-		ArrayList<Recipe> recipeResults = null;
+		ArrayList<Recipe> recipeResults = new ArrayList<Recipe>();
 
 		userIngredients = ingredientProvider.FetchIngredientsByUserID(currentUsername);
 		ingredientNames = ConvertIngredientsToModelArray(userIngredients);
 
 		for(int i = 0; i < ingredientNames.size(); i++) {
 			recipes = recipeProvider.FetchRecipesByIngredientID(userIngredients.get(i).getIngredientID());
-			if (recipeResults == null) recipeResults = recipes;
-			else recipeResults = IntersectionOfRecipeLists(recipeResults, recipes);
+			recipeResults = AddAllNoDuplicates(recipeResults, recipes);
 		}
-
 		return recipeResults;
 	}
-
-	private ArrayList<Recipe> IntersectionOfRecipeLists(ArrayList<Recipe> list1, ArrayList<Recipe> list2) {
-		ArrayList<Recipe> list = new ArrayList<Recipe>();
-
-		for (Recipe r : list1) {
-			if (ListContainsRecipe(list2, r)) {
-				list.add(r);
-			}
+	
+	private ArrayList<Recipe> AddAllNoDuplicates(ArrayList<Recipe> destination, ArrayList<Recipe> source)
+	{
+		for(Recipe r: source)
+		{
+			if(!ListContainsRecipe(destination, r)) destination.add(r);
 		}
-
-		return list;
+		return destination;
 	}
 
 	private boolean ListContainsRecipe(ArrayList<Recipe> list2, Recipe recipe) {
